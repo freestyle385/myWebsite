@@ -1,0 +1,93 @@
+/* 노멀라이즈 */
+*{
+  padding: 0;
+  margin: 0;
+}
+ul,li{
+  list-style: none;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+}
+/* 라이브러리 */
+.row::after{
+  display: block;
+  content: "";
+  clear: both;
+}
+.cell{
+  float: left;
+}
+.cell-r{
+  float: right;
+}
+/* 스타일 */
+/* 공통 */
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+html{
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+body{
+  background-color: #f8f9fa;
+  font-family: "GmarketSansMedium";
+  position: relative;
+}
+header{
+  margin-bottom: 5rem;
+}
+/* top-bar 시작 */
+#top-bar-wrap{
+  width: 100%;
+  height: 5rem;
+  position: fixed;
+  z-index: 999;
+  text-align: center;
+  color: #04C4D9;
+  background-color: #ffffff;
+  box-shadow: 1px 2px 4px #272559;
+}
+#logo-box{
+  font-size: 1.2rem;
+  line-height: 5rem;
+  padding: 0 5rem;
+}
+#nav-bar{
+  height: 100%;
+}
+#nav-bar > .menu{
+  height: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 5rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+}
+#nav-bar > .menu:last-child{
+  padding-right: 5rem;
+}
+/* top-bar 끝 */
+/* footer 시작 */
+#copy-right{
+  width: 100%;
+  height: 80px;
+  bottom: 0px;
+  position: absolute;
+  background-color: #454545;
+  color: #ffffff;
+  text-align: center;
+}
+#copy-right > p{
+  margin-top: 30px;
+}
+/* footer 끝 */

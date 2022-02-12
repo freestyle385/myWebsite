@@ -8,11 +8,22 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return "redirect:/home/main";
+		return "redirect:/home";
 	}
 	
-	@RequestMapping("/home/main")
+	@RequestMapping("/home")
 	public String homeRedirect() {
 		return "/home/main";
 	}
+	
+	@RequestMapping("/about")
+	public String showAbout() {
+		return "/home/about";
+	}
+	
+	@RequestMapping("/projects")
+	public String showProjects() {
+		return "/home/projects";
+	}
+	
 }

@@ -20,13 +20,13 @@
       <div><span>안녕하세요.</span></div>
       <div id="msg-slider">
           <div class="msg">
-            <span>다양한 시각으로 세상을 바라보고 분석하는,</span>
+            <span>사람들과 소통하고 교류하는 것을 좋아하는,</span>
           </div>
           <div class="msg">
             <span>체계를 기획하고 정리하는 것을 좋아하는,</span>
           </div>
           <div class="msg">
-            <span>사람들과 소통하기를 좋아하는 ENFJ형,</span>
+            <span>자기객관화를 통해 상황을 분석하는,</span>
           </div>
       </div>
       <div><span>신입 백엔드 개발자 허윤석입니다.</span></div>
@@ -36,7 +36,7 @@
   <section id="summary-wrap">
     <div id="summary-title"><span>SUMMARY</span></div>
     <div id=summary-body>
-      <div class="info">
+      <div class="info-wrap">
         <div class="info-title"><span>PERSONAL INFO</span></div>
         <div id="personal-body">
           <div id="profile">
@@ -64,7 +64,7 @@
         </div>
       </div>
       
-      <div class="info">
+      <div class="info-wrap">
         <div class="info-title"><span>CERTIFICATION</span></div>
         <div id="cert-body">
           <div id="cert-left">
@@ -78,7 +78,7 @@
         </div>
       </div>
       
-      <div id="skill-info" class="info">
+      <div id="skill-info" class="info-wrap">
         <div class="info-title"><span>SKILLS</span></div>
         <div id="skill-body">
           <div id="skill-fe" class="skill-logo">

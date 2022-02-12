@@ -16,11 +16,11 @@
 <header>
   <section id="top-bar-wrap" class="row">
     <div id="logo-box" class="cell">
-      <h2><a href="/home/main">Heo Yoonseok</a></h2>
+      <h2><a href="/home">Heo Yoonseok</a></h2>
     </div>
     <ul id="nav-bar" class="cell-r row">
       <li class="menu cell">
-        <a href="#">ABOUT</a>
+        <a href="../about">ABOUT</a>
       </li>
       <li class="menu cell">
          <a href="#">PROJECTS</a>

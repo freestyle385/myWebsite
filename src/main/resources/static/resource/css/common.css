@@ -52,8 +52,8 @@ header{
   position: fixed;
   z-index: 999;
   text-align: center;
-  color: #04C4D9;
-  background-color: #ffffff;
+  background-color: #f8f9fa;
+  color: #454545;
   box-shadow: 1px 2px 4px #272559;
 }
 #logo-box{

@@ -1,0 +1,70 @@
+/* about-wrap 시작 */
+#about-wrap{
+  width: 100%;
+  background-color: #C2EDF2;
+  padding-bottom: 12rem;
+  margin-bottom: 80px;
+}
+#about-title{
+  width: 100%;
+  text-align: center;
+  padding: 5rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #04C4D9;
+}
+#open-btn, #close-btn{
+  width: 30%;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  color: #4AD988;
+  padding-bottom: 5rem;
+  display: none;
+}
+#open-btn.active, #close-btn.active{
+  display: block;
+}
+#etc-wrap{
+  display: none;
+}
+#etc-wrap.active{
+  display: block;
+}
+.info-wrap{
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 3rem 3rem;
+  margin-bottom: 3rem;
+  background-color: #F2C641;
+  border-radius: 30px;
+  box-shadow: 1px 3px 4px #272559;
+}
+.info-wrap:last-child{
+  margin-bottom: 0;	
+}
+.info-title{
+  width: 100%;
+  margin-bottom: 3rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #272559;
+}
+.sub-title{
+  width: 100%;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #272559;
+}
+.sub-body{
+  width: 100%;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  line-height: 2.2rem;
+}
+.sub-body:last-child{
+  margin-bottom: 0;
+}
+/* about-wrap 끝 */

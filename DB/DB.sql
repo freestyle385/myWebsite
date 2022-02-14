@@ -48,3 +48,96 @@ CREATE TABLE `comment`
     FOREIGN KEY (memberId) REFERENCES `member` (memberId)
 );
     
+# 테스트 데이터
+
+INSERT INTO `member`
+(
+    memberId,
+    loginId,
+    loginPw,
+    authLv,
+    regDate,
+    delStatus
+)
+VALUES
+(
+    1,
+    'admin',
+    'admin',
+    1,
+    NOW(),
+    0
+);
+
+INSERT INTO board
+(
+    boardId,
+    memberId,
+    title,
+    `body`,
+    hashtag,
+    regDate,
+    updDate,
+    hitCnt
+)
+VALUES
+(
+    1,
+    1,
+    '제목1',
+    '내용1',
+    '안녕,반가워,이건,해시태그',
+    NOW(),
+    NOW(),
+    0
+)
+
+INSERT INTO board
+(
+    boardId,
+    memberId,
+    title,
+    `body`,
+    hashtag,
+    regDate,
+    updDate,
+    hitCnt
+)
+VALUES
+(
+    2,
+    1,
+    '제목2',
+    '내용2',
+    '안녕,해,시,태,그',
+    NOW(),
+    NOW(),
+    0
+)
+
+INSERT INTO board
+(
+    boardId,
+    memberId,
+    title,
+    `body`,
+    hashtag,
+    regDate,
+    updDate,
+    hitCnt
+)
+VALUES
+(
+    3,
+    1,
+    '제목3',
+    '내용3',
+    '안녕,해시,태,그',
+    NOW(),
+    NOW(),
+    0
+)
+
+SELECT * FROM board
+SELECT * FROM board WHERE hashtag LIKE CONCAT('%', '해시', '%')
+SELECT * FROM board WHERE CONCAT(',',hashtag,',') LIKE CONCAT('%,','해시',',%')

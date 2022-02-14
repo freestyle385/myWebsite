@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="myWebsite.repository.BoardRepository">
+	
+	<select id="getBoardList" resultType="myWebsite.vo.Board" parameterType="ArrayList">
+		SELECT * FROM board
+		<where>
+			<if test="searchKeyword != null">
+				CONCAT(title, `body`) LIKE CONCAT('%', #{searchKeyword}, '%')
+			</if>
+			<if test="hashtagArr != null">
+				<foreach collection="hashtagArr" item="hashtag">
+				AND CONCAT(',',hashtag,',') LIKE CONCAT('%,',#{hashtag},',%')
+				</foreach>
+			</if>
+		</where>
+		ORDER BY boardId DESC
+	</select>
+	
+	<select id="getAllHashtag" resultType="String">
+		SELECT GROUP_CONCAT(hashtag SEPARATOR ',') 
+		FROM board
+		WHERE hashtag != ''
+	</select>
+</mapper>

@@ -75,6 +75,7 @@
 /* list-wrap 시작 */
 #list-wrap{
   width: 100%;
+  min-height: 25rem;
   padding-bottom: 12rem;
   margin-bottom: 80px;
 }

@@ -21,7 +21,7 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 	}
 
-	public ResultData<ArrayList<Board>> getBoardList(String hashtag, String searchKeyword, int curPage) {
+	public ResultData<ArrayList<Board>> getBoardList(String hashtag, String searchKeyword) {
 
 		// 넘겨받은 hashtag 문자열을 분할해 list에 추가
 		List<String> hashtagArr = new ArrayList<>();
@@ -30,19 +30,27 @@ public class BoardService {
 		}
 
 		ArrayList<Board> boardList = boardRepository.getBoardList(hashtagArr, searchKeyword);
-		// int limitStart = (curPage - 1) * 4 > allCardList.size() ? allCardList.size()
-		// : (curPage - 1) * 4;
-		// int limitRange = limitStart + 4 > allCardList.size() ? allCardList.size() :
-		// limitStart + 4;
 
-		// 전체 게시물에서 subList를 통한 Limit
-		// ArrayList<Card> subCardList = new
-		// ArrayList<Card>(allCardList.subList(limitStart, limitRange));
-
-		ResultData<ArrayList<Board>> listRd = new ResultData<>("S", "boardList, ExtraDataInfo: boardListSize",
-				boardList, boardList.size() + "");
-
+		ResultData<ArrayList<Board>> listRd = new ResultData<>("S", "boardList",
+				boardList);
 		return listRd;
+	}
+	
+	public ResultData<ArrayList<Board>> getSubBoardList(ResultData<ArrayList<Board>> listRd, int curPage) {
+		
+		// 페이징을 위한 범위
+		// 게시물 10개씩 출력
+		int limitStart = (curPage - 1) * 10 > listRd.getData().size() ? listRd.getData().size() : (curPage - 1) * 10;
+		int limitRange = limitStart + 10 > listRd.getData().size() ? listRd.getData().size() : limitStart + 10;
+		// 총 페이지 개수
+		int pagesCount = (int) Math.ceil((double) listRd.getData().size() / 10);
+
+		// 전체 게시물을 subList로 자르기(크기에 알맞은 새로운 list를 생성하여 메모리 누수 줄임)
+		ArrayList<Board> subBoardList = new ArrayList<Board>(listRd.getData().subList(limitStart, limitRange));
+
+		ResultData<ArrayList<Board>> subListRd = new ResultData<>("S", "subBoardList, ExtraDataInfo: pagesCount",
+				subBoardList, pagesCount);
+		return subListRd;
 	}
 
 	public SortedSet<String> getAllHashtag() {

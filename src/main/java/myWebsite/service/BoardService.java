@@ -8,6 +8,7 @@ import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
 
+import myWebsite.dto.ForWriteBoard;
 import myWebsite.dto.ResultData;
 import myWebsite.repository.BoardRepository;
 import myWebsite.util.Util;
@@ -63,6 +64,21 @@ public class BoardService {
 		}
 
 		return null;
+	}
+
+	public ResultData<Integer> doBoardWrite(ForWriteBoard board) {
+		
+		ArrayList<String> nullField = Util.fieldChk(board);
+		
+		if(nullField.size() > 0) {
+			// 입력되지 않은 값 배열
+			return new ResultData<Integer>("F", "입력되지 않은 값이 있습니다.", nullField.size(), String.join(",", nullField));
+		}
+		
+		boardRepository.doBoardWrite(board);
+		Integer lastInsertId = boardRepository.getLastInsertId();
+		
+		return new ResultData<Integer>("S", "카드 생성 완료", lastInsertId);
 	}
 
 }

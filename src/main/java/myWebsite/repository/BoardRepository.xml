@@ -24,4 +24,24 @@
 		FROM board
 		WHERE hashtag != ''
 	</select>
+	
+	<insert id="doBoardWrite" parameterType="myWebsite.dto.ForWriteBoard">
+		INSERT INTO board 
+			( 
+				memberId, 
+				title, 
+				`body`, 
+				hashtag
+			)
+			VALUES
+			( 
+				#{memberId}, 
+				#{title}, 
+				#{body}, 
+				#{hashtag}
+			)
+	</insert>
+	<select id="getLastInsertId" resultType="Integer">
+		SELECT LAST_INSERT_ID()
+	</select>
 </mapper>

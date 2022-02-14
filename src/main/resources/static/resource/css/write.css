@@ -1,0 +1,29 @@
+/* write-wrap 시작 */
+#write-wrap{
+  width: 100%;
+  min-height: 65rem;
+}
+#write-form{
+  width: 80%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 5rem 0;
+}
+#board-write{
+  width: 100%; 
+  border-top: 2px solid #252525; 
+  border-bottom: 1px solid #ccc; 
+  border-collapse: collapse;
+}
+#board-write tbody input{
+  width: 100%;
+}
+#board-write tbody td{
+  padding: 10px 15px; 
+  border-bottom: 1px solid #ccc;
+}
+#board-write tbody textarea{
+  width: 100%; 
+  min-height: 170px;
+}
+/* write-wrap 끝 */

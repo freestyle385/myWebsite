@@ -26,7 +26,7 @@
          <a href="#">PROJECTS</a>
       </li>
       <li class="menu cell">
-         <a href="../board">BOARD</a>
+         <a href="../board/list">BOARD</a>
       </li>
       <li class="menu cell">
          <a href="#">LOGIN</a>

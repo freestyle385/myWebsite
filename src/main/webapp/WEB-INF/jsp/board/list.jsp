@@ -17,7 +17,7 @@
 </body>
 <article>
   <section id="search-wrap">
-    <form action="/board" method="GET" id="search-form">
+    <form action="/board/list" method="GET" id="search-form">
       <!-- 해시태그 필터 -->
       <div id="filter-wrap">
         <div id="filter-name"><span>해시태그 필터</span></div>
@@ -45,6 +45,7 @@
   <section id="list-wrap">
     <div id="list-header">
     	<div id="cnt-msg">게시물 ${listRd.getData().size()}개가 검색되었습니다.</div>
+    	<div id="list-sort"></div>
     </div>
     <table id="board-list">
 	        <colgroup>
@@ -78,7 +79,7 @@
 	        </tbody>
 	    </table>
 	    <div id="list-footer">
-        <div id="write-btn"><a href="#">글쓰기</a></div>
+        <div id="write-btn"><a href="/board/write">글쓰기</a></div>
         <nav id="page-nav">
           <ul>
           <!-- 페이지 이동 시 기존 파라미터가 날아가지 않도록 저장 -->

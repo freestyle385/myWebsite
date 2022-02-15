@@ -1,14 +1,23 @@
 package myWebsite.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.SortedSet;
+import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.JsonObject;
 
 import myWebsite.dto.ForWriteBoard;
 import myWebsite.dto.ResultData;
@@ -65,5 +74,38 @@ public class BoardController {
 		
 		return Util.jsReplace("", String.format("/board/detail?boardId=%d", writeRd.getData()));
 	}
-
+	
+	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
+	@ResponseBody
+	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+		
+		JsonObject jsonObject = new JsonObject();
+		
+		//저장될 외부 파일 경로
+		String fileRoot = "C:\\summernote_image\\";
+		//오리지널 파일명
+		String originalFileName = multipartFile.getOriginalFilename();
+		//파일 확장자
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	
+		
+		//저장될 파일 명
+		String savedFileName = UUID.randomUUID() + extension;	
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			//파일 저장
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	
+			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+			jsonObject.addProperty("responseCode", "success");
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		
+		return jsonObject;
+	}
 }

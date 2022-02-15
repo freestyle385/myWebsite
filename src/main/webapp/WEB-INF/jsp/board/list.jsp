@@ -79,44 +79,43 @@
 	        </tbody>
 	    </table>
 	    <div id="list-footer">
-        <div id="write-btn"><a href="/board/write">글쓰기</a></div>
-        <nav id="page-nav">
-          <ul>
-          <!-- 페이지 이동 시 기존 파라미터가 날아가지 않도록 저장 -->
-          <c:set var="pageBaseUri" value="?hashtag=${searchedTag}&searchKeyword=${searchedKeyword}" />
-          <c:set var="pageNavArmLen" value="4" />
-          <c:set var="startPage" value="${curPage - pageNavArmLen >= 1 ? curPage - pageNavArmLen : 1}" />
-          <c:set var="endPage" value="${curPage + pageNavArmLen <= subListRd.getExtraData() ? curPage + pageNavArmLen : subListRd.getExtraData()}" />
-          
-          <!-- 항상 존재하는 1페이지 -->
-          <c:if test="${startPage > 1}">
-          	<li><a href="${pageBaseUri}&curPage=1">1</a></li>
-          	
-          	<!-- curPage 위치상 보이지 않는 페이지는 ...로 표시  -->
-            <c:if test="${startPage > 2}">
-          	  <li>...</li>
-            </c:if>
-          </c:if>
-          
-          
-          <!-- 현재 페이지에서 앞뒤로 4개씩 표시 -->
-          <c:forEach var="pageNum" begin="${startPage}" end="${endPage}" varStatus="pageStatus">
-          	<li><a href="${pageBaseUri}&curPage=${pageNum}">${pageNum}</a></li>
-          </c:forEach>
-          
-          <c:if test="${endPage < subListRd.getExtraData()}">
-            <!-- curPage 위치상 보이지 않는 페이지는 ...로 표시  -->
-            <c:if test="${endPage < subListRd.getExtraData() - 1}">
-          	  <li>...</li>
-            </c:if>
-            
-	        <!-- 항상 존재하는 마지막 페이지 -->  
-          	<a href="${pageBaseUri}&curPage=${subListRd.getExtraData()}">${subListRd.getExtraData()}</a>
-          </c:if>
-          </ul>
-        </nav>
-        <div class="empty-btn"></div>
-        <form action=""></form>
+	        <div id="write-btn"><a href="/board/write">글쓰기</a></div>
+	        <nav id="page-nav">
+	          <ul>
+	          <!-- 페이지 이동 시 기존 파라미터가 날아가지 않도록 저장 -->
+	          <c:set var="pageBaseUri" value="?hashtag=${searchedTag}&searchKeyword=${searchedKeyword}" />
+	          <c:set var="pageNavArmLen" value="4" />
+	          <c:set var="startPage" value="${curPage - pageNavArmLen >= 1 ? curPage - pageNavArmLen : 1}" />
+	          <c:set var="endPage" value="${curPage + pageNavArmLen <= subListRd.getExtraData() ? curPage + pageNavArmLen : subListRd.getExtraData()}" />
+	          
+	          <!-- 항상 존재하는 1페이지 -->
+	          <c:if test="${startPage > 1}">
+	          	<li><a href="${pageBaseUri}&curPage=1">1</a></li>
+	          	
+	          	<!-- curPage 위치상 보이지 않는 페이지는 ...로 표시  -->
+	            <c:if test="${startPage > 2}">
+	          	  <li>...</li>
+	            </c:if>
+	          </c:if>
+	          
+	          
+	          <!-- 현재 페이지에서 앞뒤로 4개씩 표시 -->
+	          <c:forEach var="pageNum" begin="${startPage}" end="${endPage}" varStatus="pageStatus">
+	          	<li><a href="${pageBaseUri}&curPage=${pageNum}">${pageNum}</a></li>
+	          </c:forEach>
+	          
+	          <c:if test="${endPage < subListRd.getExtraData()}">
+	            <!-- curPage 위치상 보이지 않는 페이지는 ...로 표시  -->
+	            <c:if test="${endPage < subListRd.getExtraData() - 1}">
+	          	  <li>...</li>
+	            </c:if>
+	            
+		        <!-- 항상 존재하는 마지막 페이지 -->  
+	          	<a href="${pageBaseUri}&curPage=${subListRd.getExtraData()}">${subListRd.getExtraData()}</a>
+	          </c:if>
+	          </ul>
+	        </nav>
+	        <div class="empty-btn"></div>
       </div>
   </section>
 </article>

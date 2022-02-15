@@ -17,6 +17,9 @@
 }
 #board-write tbody input{
   width: 100%;
+  height: 2rem;
+  border: none;
+  background-color: inherit;
 }
 #board-write tbody td{
   padding: 10px 15px; 
@@ -24,6 +27,21 @@
 }
 #board-write tbody textarea{
   width: 100%; 
-  min-height: 170px;
+}
+#title-td{
+  width: 10%;
+  color: #454545;
+  font-size: 1.2rem;
+}
+#input-td > input{
+  padding: 0 1rem;	
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#byte-td{
+  width: 10%;
+  color: #454545;
+  font-size: 0.5rem;
+  text-align: center;
 }
 /* write-wrap 끝 */

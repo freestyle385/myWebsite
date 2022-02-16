@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import myWebsite.dto.ForWriteBoard;
 import myWebsite.dto.ResultData;
@@ -22,7 +23,7 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 	}
 
-	public ResultData<ArrayList<Board>> getBoardList(String hashtag, String searchKeyword) {
+	public ResultData<ArrayList<Board>> getBoardList(String hashtag, String searchKeyword) throws Exception {
 
 		// 넘겨받은 hashtag 문자열을 분할해 list에 추가
 		List<String> hashtagArr = new ArrayList<>();
@@ -37,7 +38,7 @@ public class BoardService {
 		return listRd;
 	}
 	
-	public ResultData<ArrayList<Board>> getSubBoardList(ResultData<ArrayList<Board>> listRd, int curPage) {
+	public ResultData<ArrayList<Board>> getSubBoardList(ResultData<ArrayList<Board>> listRd, int curPage) throws Exception {
 		
 		// 페이징을 위한 범위
 		// 게시물 10개씩 출력
@@ -54,7 +55,7 @@ public class BoardService {
 		return subListRd;
 	}
 
-	public SortedSet<String> getAllHashtag() {
+	public SortedSet<String> getAllHashtag() throws Exception {
 		String foundHashtag = boardRepository.getAllHashtag();
 
 		// Set 특성에 따라 foundHashtag의 중복 태그 제거 및 정렬
@@ -66,7 +67,7 @@ public class BoardService {
 		return null;
 	}
 
-	public ResultData<Integer> doBoardWrite(ForWriteBoard board) {
+	public ResultData<Integer> doBoardWrite(ForWriteBoard board) throws Exception {
 		
 		ArrayList<String> nullField = Util.fieldChk(board);
 		
@@ -78,10 +79,13 @@ public class BoardService {
 		boardRepository.doBoardWrite(board);
 		Integer lastInsertId = boardRepository.getLastInsertId();
 		
-		return new ResultData<Integer>("S", "카드 생성 완료", lastInsertId);
+		return new ResultData<Integer>("S", lastInsertId + "번 게시물 생성 완료", lastInsertId);
 	}
-
-	public ResultData<Board> getBoardDetail(int boardId) {
+	
+	@Transactional(rollbackFor=Exception.class)
+	public ResultData<Board> getBoardDetail(int boardId) throws Exception {
+		boardRepository.updateHitCnt(boardId);
+		
 		Board board = boardRepository.getBoardDetail(boardId);
 		
 		if(Util.emptyChk(board)) {

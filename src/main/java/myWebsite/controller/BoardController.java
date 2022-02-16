@@ -66,7 +66,7 @@ public class BoardController {
 	
 	@RequestMapping("/board/doWrite")
 	@ResponseBody
-	public String doBoardWrite(@ModelAttribute ForWriteBoard board){
+	public String doBoardWrite(@ModelAttribute ForWriteBoard board) throws Exception {
 		
 		ResultData<Integer> writeRd = boardService.doBoardWrite(board);
 		
@@ -79,7 +79,7 @@ public class BoardController {
 	
 	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
 	@ResponseBody
-	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
 		
 		JsonObject jsonObject = new JsonObject();
 		
@@ -113,7 +113,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/detail")
-	public String showBoardDetail(int boardId, Model md, HttpServletResponse resp) {
+	public String showBoardDetail(int boardId, Model md, HttpServletResponse resp) throws Exception {
 		
 		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
 		

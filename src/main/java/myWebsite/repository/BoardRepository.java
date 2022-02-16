@@ -21,4 +21,6 @@ public interface BoardRepository {
 	Integer getLastInsertId();
 
 	Board getBoardDetail(@Param("boardId") int boardId);
+
+	void updateHitCnt(int boardId);
 }

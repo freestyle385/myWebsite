@@ -46,6 +46,12 @@
 		SELECT LAST_INSERT_ID()
 	</select>
 	
+	<update id="updateHitCnt" parameterType="int">
+		UPDATE board
+		SET hitCnt = hitCnt + 1
+		WHERE boardId = #{boardId}
+	</update>
+	
 	<select id="getBoardDetail" resultType="myWebsite.vo.Board">
 		SELECT * FROM board WHERE boardId = #{boardId}
 	</select>

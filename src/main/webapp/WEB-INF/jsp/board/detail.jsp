@@ -38,7 +38,7 @@
 	      </tr>
 	      <tr>
 	        <th scope="row">제목</th>
-	        <td colspan="6">${detailRd.getData().getTitle()}</td>
+	        <td colspan="6"><span id="title-span">${detailRd.getData().getTitle()}</span></td>
 	      </tr>
 	      <tr>
 	        <td colspan="6">${detailRd.getData().getBody()}</td>

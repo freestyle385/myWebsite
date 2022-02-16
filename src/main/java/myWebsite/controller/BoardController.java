@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,31 +83,50 @@ public class BoardController {
 		
 		JsonObject jsonObject = new JsonObject();
 		
-		//저장될 외부 파일 경로
+		// 저장될 외부 파일 경로
 		String fileRoot = "C:\\summernote_image\\";
-		//오리지널 파일명
+		// 오리지널 파일명
 		String originalFileName = multipartFile.getOriginalFilename();
-		//파일 확장자
+		// 파일 확장자
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	
 		
-		//저장될 파일 명
+		// 저장될 파일 명
 		String savedFileName = UUID.randomUUID() + extension;	
 		
 		File targetFile = new File(fileRoot + savedFileName);	
 		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
-			//파일 저장
+			// 파일 저장
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	
 			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 				
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			// 저장된 파일 삭제
+			FileUtils.deleteQuietly(targetFile);	
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
 		
 		return jsonObject;
+	}
+	
+	@RequestMapping("/board/detail")
+	public String showBoardDetail(int boardId, Model md, HttpServletResponse resp) {
+		
+		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
+		
+		if(detailRd.isFail()) {
+			try {
+				Util.javaHistoryBack(resp, detailRd.getMsg());
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		md.addAttribute("detailRd", detailRd);
+		
+		return "/board/detail";
 	}
 }

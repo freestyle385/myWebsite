@@ -2,6 +2,16 @@ DROP DATABASE IF EXISTS myWebsite;
 CREATE DATABASE myWebsite;
 USE myWebsite;
 
+CREATE TABLE `member`
+(
+    memberId INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '작성자 인덱스',
+    loginId VARCHAR(100) NOT NULL COMMENT '이메일 아이디',
+    loginPw VARCHAR(100) NOT NULL COMMENT '비밀번호',
+    authLv TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '권한 레벨(회원=0, 관리자=1)',
+    regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부(미탈퇴=0, 탈퇴=1)'
+);
+
 CREATE TABLE board
 (
     boardId INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '게시물 인덱스',
@@ -15,17 +25,7 @@ CREATE TABLE board
     FOREIGN KEY (memberId) REFERENCES `member` (memberId)
 );
 
-CREATE TABLE `member`
-(
-    memberId INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '작성자 인덱스',
-    loginId VARCHAR(100) NOT NULL COMMENT '이메일 아이디',
-    loginPw VARCHAR(100) NOT NULL COMMENT '비밀번호',
-    authLv TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '권한 레벨(회원=0, 관리자=1)',
-    regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',
-    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부(미탈퇴=0, 탈퇴=1)'
-);
-
-CREATE TABLE `img`
+CREATE TABLE `imgFile`
 (
     imgId INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '이미지 인덱스',
     boardId INT(10) UNSIGNED NOT NULL COMMENT '게시물 인덱스',
@@ -47,8 +47,6 @@ CREATE TABLE `comment`
     FOREIGN KEY (boardId) REFERENCES board (boardId),
     FOREIGN KEY (memberId) REFERENCES `member` (memberId)
 );
-    
-# 테스트 데이터
 
 INSERT INTO `member`
 (
@@ -80,15 +78,15 @@ INSERT INTO board
     updDate,
     hitCnt
 )
-VALUES
+values
 (
     1,
     1,
     '제목1',
     '내용1',
     '안녕,반가워,이건,해시태그',
-    NOW(),
-    NOW(),
+    now(),
+    now(),
     0
 )
 
@@ -138,6 +136,18 @@ VALUES
     0
 )
 
+SELECT * FROM `member`
 SELECT * FROM board
+SELECT count(*) FROM board
 SELECT * FROM board WHERE hashtag LIKE CONCAT('%', '해시', '%')
-SELECT * FROM board WHERE CONCAT(',',hashtag,',') LIKE CONCAT('%,','해시',',%')
+SELECT * FROM board where CONCAT(',',hashtag,',') LIKE concat('%,','해시',',%')
+
+# 게시물 늘리기
+INSERT INTO board
+(
+    memberId, title, `body`, hashtag, regDate, updDate 
+)
+SELECT 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND()), '', NOW(), NOW()
+FROM board;
+
+SELECT FLOOR(RAND() * 999 + 1);

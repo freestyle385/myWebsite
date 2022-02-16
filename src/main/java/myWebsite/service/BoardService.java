@@ -81,4 +81,14 @@ public class BoardService {
 		return new ResultData<Integer>("S", "카드 생성 완료", lastInsertId);
 	}
 
+	public ResultData<Board> getBoardDetail(int boardId) {
+		Board board = boardRepository.getBoardDetail(boardId);
+		
+		if(Util.emptyChk(board)) {
+			return new ResultData<Board>("F", "해당 글은 존재하지 않습니다.");
+		}
+		
+		return new ResultData<Board>("S", boardId + "번 글 조회 완료", board);
+	}
+
 }

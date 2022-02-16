@@ -66,7 +66,7 @@
 	          <c:forEach var="board" items="${subListRd.getData()}">
               <tr>
                 <td>${board.boardId}</td>
-                <td class="title"><a href="#">${board.title}</a></td>
+                <td class="title"><a href="/board/detail?boardId=${board.boardId}">${board.title}</a></td>
                 <td>${board.regDate}</td>
                 <td>${board.hitCnt}</td>
               </tr>

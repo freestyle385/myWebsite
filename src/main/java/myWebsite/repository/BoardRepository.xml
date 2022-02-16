@@ -41,7 +41,12 @@
 				#{hashtag}
 			)
 	</insert>
+	
 	<select id="getLastInsertId" resultType="Integer">
 		SELECT LAST_INSERT_ID()
+	</select>
+	
+	<select id="getBoardDetail" resultType="myWebsite.vo.Board">
+		SELECT * FROM board WHERE boardId = #{boardId}
 	</select>
 </mapper>

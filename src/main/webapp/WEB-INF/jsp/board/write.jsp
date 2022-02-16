@@ -56,7 +56,7 @@
 	 </div>
 	 
 	 <div id="write-footer">
-      	<input type="button" class="back-btn" value="뒤로가기" onclick="history.back(-1);">
+      	<input type="button" class="back-btn" value="목록으로" onclick="location.href='/board/list'">
       	<input type="button" class="submit-btn" value="저장">
      </div>
   </section>

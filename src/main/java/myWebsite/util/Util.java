@@ -90,7 +90,7 @@ public class Util {
 		return String.format(script, msg);
 	}
 	
-	// responseBody 태그에서 활용
+	// responseBody 태그가 없을 시 활용
 	public static void javaHistoryBack(HttpServletResponse rs, String msg) throws IOException {
 
 		rs.setContentType("text/html; charset=UTF-8");
@@ -99,7 +99,7 @@ public class Util {
 		out.println(jsHistoryBack(msg));
 		out.flush();
 	}
-	// responseBody 태그에서 활용
+	// responseBody 태그가 없을 시 활용
 	public static void javaReplace(HttpServletResponse rs, String msg, String uri) throws IOException {
 
 		rs.setContentType("text/html; charset=UTF-8");

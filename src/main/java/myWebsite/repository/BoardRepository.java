@@ -19,4 +19,6 @@ public interface BoardRepository {
 	void doBoardWrite(ForWriteBoard board);
 
 	Integer getLastInsertId();
+
+	Board getBoardDetail(@Param("boardId") int boardId);
 }

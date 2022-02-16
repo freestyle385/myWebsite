@@ -1,0 +1,93 @@
+/* detail-wrap 시작 */
+#detail-wrap{
+  width: 100%;
+  min-height: 65rem;
+}
+#table-wrap{
+  width: 80%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-top: 5rem;	
+}
+#board-detail{
+  width: 100%; 
+  border-top: 2px solid #272559; 
+  border-bottom: 1px solid #ccc; 
+  border-collapse: collapse;
+}
+#board-detail tbody th{
+  color: #454545; 
+  vertical-align: middle; 
+  text-align: center;
+  font-size: 1.2rem;
+}
+#board-detail tbody th, #board-detail tbody td{
+  padding: 1rem 1rem; 
+  border-bottom: 1px solid #ccc;
+}
+#detail-footer{
+  width: 80%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.back-btn{
+  width: 5rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #008000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #272559;
+  text-align: center;
+  line-height: 2rem;
+  color: #ffffff;
+  margin: 0 1rem;
+}
+#btn-wrap{
+  display: flex;
+  justify-content: space-between;
+}
+#delete-btn{
+  width: 5rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #960707;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #272559;
+  text-align: center;
+  line-height: 2rem;
+  color: #ffffff;
+}
+#modify-btn{
+  width: 5rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #272559;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #272559;
+  text-align: center;
+  line-height: 2rem;
+  color: #ffffff;
+  margin: 0 1rem;
+}
+/* detail-wrap 끝 */

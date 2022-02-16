@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +46,19 @@
 	      </tr>
 	    </tbody>
   	</table>
+  </div>
+  <div id="detail-tag">
+  	<div id="tag-wrap">
+	    <!--  해시태그 목록   -->
+	    <ul id="tag-list">
+	    	<c:if test="${detailRd.getData().getHashtag().length() > 0}">
+		    	<!-- jstl fn을 활용해 태그 문자열 split -->
+		    	<c:forEach var="tagValue" items="${fn:split(detailRd.getData().getHashtag(), ',')}">
+		    		<li class="tag-item">#${tagValue}</li>
+		    	</c:forEach>
+	    	</c:if>
+	    </ul>
+  	</div>
   </div>
   <div id="detail-footer">
     <input type="button" class="back-btn" value="목록으로" onclick="location.href='/board/list'">

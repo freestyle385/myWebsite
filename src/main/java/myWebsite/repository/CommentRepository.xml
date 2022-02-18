@@ -8,6 +8,10 @@
 		SELECT * FROM `comment` WHERE boardId = #{boardId} ORDER BY commId DESC
 	</select>
 	
+	<select id="getCommentsCount" resultType="int">
+		SELECT COUNT(*) FROM `comment` WHERE boardId = #{boardId}
+	</select>
+	
 	<insert id="doCommentWrite" parameterType="myWebsite.dto.ForWriteComment">
 		INSERT INTO `comment` 
 			( 

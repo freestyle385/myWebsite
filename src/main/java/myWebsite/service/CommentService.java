@@ -20,6 +20,11 @@ public class CommentService {
 		
 		return commentRepository.getCommentList(boardId);
 	}
+	
+	public int getCommentsCount(int boardId) throws Exception {
+		
+		return commentRepository.getCommentsCount(boardId);
+	}
 
 	public int doCommentWrite(ForWriteComment comment) throws Exception {
 

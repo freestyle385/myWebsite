@@ -12,6 +12,8 @@ import myWebsite.vo.Comment;
 public interface CommentRepository {
 	
 	ArrayList<Comment> getCommentList(@Param("boardId") int boardId) throws Exception;
+	
+	int getCommentsCount(@Param("boardId") int boardId) throws Exception;
 
 	int doCommentWrite(ForWriteComment comment) throws Exception;
 

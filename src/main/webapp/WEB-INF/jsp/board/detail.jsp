@@ -71,7 +71,7 @@
 
 <section id="etc-wrap">
 	<div id="comment-wrap">
-		<div id="comment-count">0 Comments</div>
+		<div id="comment-count"><span id="get-count"></span> Comments</div>
 		<div id="write-box">
 			<form method="POST" id="write-form" class="comment-form">
 				<input type="hidden" name="boardId" value="${detailRd.getData().getBoardId()}"/>
@@ -125,6 +125,21 @@ function getCommList() {
 				$("#comment-list").append(str);
             });
 
+		},
+		error : function() {
+			alert('다시 시도해주세요.');
+		}
+	})
+	
+	$.ajax({
+		type : "GET",
+		url : "/comment/getCommentsCount",
+		data : {
+			"boardId" : boardId
+		},
+		success : function(data) {
+			$("#get-count").empty();
+			$("#get-count").append(data);		
 		},
 		error : function() {
 			alert('다시 시도해주세요.');

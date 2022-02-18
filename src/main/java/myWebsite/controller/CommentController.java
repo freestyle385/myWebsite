@@ -26,6 +26,13 @@ public class CommentController {
 		return commentService.getCommentList(boardId);
 	}
 	
+	@RequestMapping("/comment/getCommentsCount")
+	@ResponseBody
+	private int showCommentsCount(@RequestParam("boardId") int boardId) throws Exception {
+		
+		return commentService.getCommentsCount(boardId);
+	}
+	
 	@RequestMapping("/comment/doWrite")
 	@ResponseBody
 	public int doCommentWrite(@RequestParam("boardId") int boardId, @RequestParam("commBody") String commBody) throws Exception {

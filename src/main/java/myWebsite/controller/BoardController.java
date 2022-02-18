@@ -126,7 +126,6 @@ public class BoardController {
 		}
 		
 		md.addAttribute("detailRd", detailRd);
-		
 		return "/board/detail";
 	}
 }

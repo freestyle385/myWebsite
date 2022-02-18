@@ -12,15 +12,15 @@ import myWebsite.vo.Board;
 @Mapper
 public interface BoardRepository {
 	
-	ArrayList<Board> getBoardList(@Param("hashtagArr") List<String> hashtagArr, @Param("searchKeyword") String searchKeyword);
+	ArrayList<Board> getBoardList(@Param("hashtagArr") List<String> hashtagArr, @Param("searchKeyword") String searchKeyword) throws Exception;
 
-	String getAllHashtag();
+	String getAllHashtag() throws Exception;
 
-	void doBoardWrite(ForWriteBoard board);
+	void doBoardWrite(ForWriteBoard board) throws Exception;
 
-	Integer getLastInsertId();
+	Integer getLastInsertId() throws Exception;
 
-	Board getBoardDetail(@Param("boardId") int boardId);
+	Board getBoardDetail(@Param("boardId") int boardId) throws Exception;
 
-	void updateHitCnt(int boardId);
+	void updateHitCnt(int boardId) throws Exception;
 }

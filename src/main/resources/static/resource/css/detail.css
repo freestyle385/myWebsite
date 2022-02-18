@@ -1,7 +1,6 @@
 /* detail-wrap 시작 */
 #detail-wrap{
   width: 100%;
-  min-height: 65rem;
 }
 #table-wrap{
   width: 80%;
@@ -37,7 +36,9 @@
 }
 #tag-wrap{
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
 }
 #tag-list{
   display: flex;
@@ -121,3 +122,127 @@
   margin: 0 1rem;
 }
 /* detail-wrap 끝 */
+/* comment-wrap 시작 */
+#etc-wrap{
+  width: 100%;
+  margin-top: 5rem;
+  margin-bottom: 15rem;
+  min-height: 30rem;
+}
+#comment-wrap{
+  width: 80%;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+#comment-count{
+  font-size: 1.5rem;
+}
+#write-box{
+  padding: 1rem;
+  border-top: 2px solid #99aff2;
+  border-bottom: 1px solid #99aff2;
+  background-color: #c4d4f2;	
+}
+.comment-form{
+  width: 100%;
+  height: 7rem;
+  border: 1px solid #99aff2;
+  background-color: #f8f9fa;
+}
+.comment-write{
+  display: flex;
+  height: 5rem;
+  padding: 1rem;
+}
+.comment-write > textarea{
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: #f8f9fa;
+}
+.btn-box{
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: flex-end;
+}
+.write-btn{
+  width: 5rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #272559;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #272559;
+  text-align: center;
+  line-height: 2rem;
+  color: #ffffff;
+  margin-top: 1rem;
+}
+#list-box{
+  margin-top: 1rem;
+  padding: 1rem;
+  border-top: 2px solid #99aff2;
+  border-bottom: 1px solid #99aff2;
+  background-color: #c4d4f2;
+}
+#comment-list{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.comm-item{
+  width: 100%;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #99aff2;
+}
+.comm-writer{
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem 0;
+}
+.comm-body{
+  width: 100%;
+  padding: 0.5rem 0;
+}
+.regDate-btn-wrap{
+  display: flex;
+}
+.comm-regDate{
+  width: 50%;
+  padding: 0.5rem 0;	
+}
+.comm-btn-box{
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+.comm-btn{
+  width: 3rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #a6a6a6;
+  box-shadow: 1px 1px 2px #272559;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 2rem;
+  color: #ffffff;
+  margin: 0.25rem 0.5rem;
+}
+/* comment-wrap 끝 */

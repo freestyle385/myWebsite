@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="myWebsite.repository.CommentRepository">
+	
+	<select id="getCommentList" resultType="myWebsite.vo.Comment" parameterType="ArrayList">
+		SELECT * FROM `comment` WHERE boardId = #{boardId} ORDER BY commId DESC
+	</select>
+	
+	<insert id="doCommentWrite" parameterType="myWebsite.dto.ForWriteComment">
+		INSERT INTO `comment` 
+			( 
+				boardId,
+				memberId, 
+				commBody
+			)
+			VALUES
+			( 
+				#{boardId}, 
+				#{memberId}, 
+				#{commBody}
+			)
+	</insert>
+	
+	<update id="doCommentModify" parameterType="myWebsite.dto.ForWriteComment">
+        UPDATE `comment`
+        SET commBody = #{commBody},
+        	updDate = NOW()
+        WHERE commId = #{commId}
+    </update>
+	
+</mapper>

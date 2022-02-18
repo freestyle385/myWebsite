@@ -12,6 +12,7 @@ public class Member {
 	private int memberId;
 	private String loginId;
 	private String loginPw;
+	private String memberName;
 	private int authLv;
 	private String regDate;
 	private int delStatus;

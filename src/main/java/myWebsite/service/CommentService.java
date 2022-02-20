@@ -35,6 +35,11 @@ public class CommentService {
 		
 		return commentRepository.doCommentModify(commId, commBody);
 	}
+
+	public int doCommentDelete(int commId) {
+		
+		return commentRepository.doCommentDelete(commId);
+	}
 	
 	
 }

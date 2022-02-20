@@ -51,4 +51,11 @@ public class CommentController {
 		
 		return commentService.doCommentModify(commId, commBody);
 	}
+	
+	@RequestMapping("/comment/doDelete")  
+    @ResponseBody
+    private int doCommentDelete(@RequestParam("commId") int commId) throws Exception{
+        
+        return commentService.doCommentDelete(commId);
+    }
 }

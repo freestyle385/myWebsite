@@ -64,7 +64,7 @@
     <input type="button" class="back-btn" value="목록으로" onclick="location.href='/board/list'">
     <div id="btn-wrap">
     	<div id="modify-btn"><a href="/board/modify?boardId=${detailRd.getData().getBoardId()}">수정하기</a></div>
-    	<div id="delete-btn"><a onclick="if (confirm('카드를 삭제하시겠습니까?') == false) {return false};" href="/board/doDelete?boardId=${detailRd.getData().getBoardId()}">삭제하기</a></div>
+    	<div id="delete-btn"><a onclick="if (confirm('해당 글을 삭제하시겠습니까?') == false) {return false};" href="/board/doDelete?boardId=${detailRd.getData().getBoardId()}">삭제하기</a></div>
     </div>
   </div>
 </section>  
@@ -199,6 +199,28 @@ function doCommModify(commId) {
         error : function() {
         	alert('다시 시도해주세요.');
 		}
+    });
+}
+
+// 댓글 삭제 
+function doCommDelete(commId){
+    
+	if (confirm('해당 댓글을 삭제하시겠습니까?') == false) {
+		return false;
+	};
+	
+	$.ajax({
+        url : '/comment/doDelete',
+        type : 'post',
+        data : {
+        	'commId' : commId
+        },
+        success : function(data){
+        	// 댓글 삭제 후 댓글 목록 reload
+            if(data == 1) {
+            	getCommList();  
+            }
+        }
     });
 }
 

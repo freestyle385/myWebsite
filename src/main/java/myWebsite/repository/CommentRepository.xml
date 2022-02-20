@@ -34,4 +34,8 @@
         WHERE commId = #{commId}
     </update>
 	
+	<delete id="doCommentDelete" parameterType="int">
+        DELETE FROM `comment` WHERE commId = #{commId}
+    </delete>
+
 </mapper>

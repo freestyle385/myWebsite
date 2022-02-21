@@ -95,4 +95,18 @@ public class BoardService {
 		return new ResultData<Board>("S", boardId + "번 글 조회", board);
 	}
 
+	public ResultData<Integer> doBoardModify(ForWriteBoard board, int boardId) throws Exception {
+		
+		ArrayList<String> nullField = Util.fieldChk(board);
+
+		if (nullField.size() > 0) {
+			// 입력되지 않은 값 배열
+			return new ResultData<Integer>("F", "입력되지 않은 값이 있습니다.", nullField.size(), String.join(",", nullField));
+		}
+		
+		boardRepository.doBoardModify(board, boardId);
+		
+		return new ResultData<Integer>("S", boardId + "번 글 수정", boardId);
+	}
+
 }

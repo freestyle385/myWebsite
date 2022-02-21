@@ -55,4 +55,12 @@
 	<select id="getBoardDetail" resultType="myWebsite.vo.Board">
 		SELECT * FROM board WHERE boardId = #{boardId}
 	</select>
+	
+	<update id="doBoardModify" parameterType="myWebsite.dto.ForWriteBoard">
+		UPDATE board
+		SET title = #{board.title},
+			`body` = #{board.body},
+			hashtag = #{board.hashtag}
+		WHERE boardId = #{boardId}
+	</update>
 </mapper>

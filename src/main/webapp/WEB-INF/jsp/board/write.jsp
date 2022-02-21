@@ -15,35 +15,45 @@
 <link rel="stylesheet" href="/resource/css/summernote/summernote-lite.css">
 
 <!-- css / js -->
-<link rel="stylesheet" type="text/css" href="/resource/css/write.css">
-<script src="/resource/js/write-checkByte.js"></script>
+<link rel="stylesheet" type="text/css" href="/resource/css/board-style.css">
+<script src="/resource/js/checkByte.js"></script>
 <script src="/resource/js/write-hashtag.js"></script>
-<script src="/resource/js/write-summernote.js"></script>
+<script src="/resource/js/summernote.js"></script>
 
 </head>
 
 </body>
 <article>
   <section id="write-wrap">
-    <form action="/board/doWrite?memberId=1&" method="POST" id="write-form">
-      <table id="board-write">
-        <tr>
-          <td id="title-td">제목</td>
-          <td id="input-td"><input type="text" id="title" name="title" autocomplete="off" placeholder="제목을 입력해주세요."/></td>
-          <td id="byte-td"><div id="byte-box"><span id="nowByte">0</span> / 100 byte</div></td>
-        </tr>
-        <tr>
-          <td id="body-td" colspan="3">
-            <textarea id="summernote" name="body"></textarea>
-          </td>
-        </tr>
+    <form action="/board/doWrite?memberId=1&" method="POST" id="table-wrap">
+      <table id="board-table">
+      	<colgroup>
+	      <col width="20%"/>
+	      <col width="10%"/>
+	      <col width="20%"/>
+	      <col width="20%"/>
+	      <col width="20%"/>
+	      <col width="10%"/>
+	    </colgroup>
+	    <tbody>
+	        <tr>
+	          <th scope="row" id="title-td">제목</th>
+	          <td colspan="4" id="input-td"><input type="text" id="title" name="title" autocomplete="off" placeholder="제목을 입력해주세요."/></td>
+	          <td colspan="1" id="byte-td"><div id="byte-box"><span id="nowByte">0</span> / 100 byte</div></td>
+	        </tr>
+	        <tr>
+	          <td colspan="7" id="body-td" colspan="3">
+	            <textarea id="summernote" name="body"></textarea>
+	          </td>
+	        </tr>
+        </tbody>
       </table>
 
       <!-- 게시물 저장 시 함께 넘겨줄 tag값들을 위한 hidden input -->
       <input type="hidden" value="" name="hashtag" id="rdTag"/>
 	 </form>
 	 
-	 <div id="write-tag">
+	 <div id="board-hashtag">
 	   <div id="msg"><span>*입력 후 엔터를 누르면 적용</span></div>
        <div id="tag-wrap">
 	      <div id="tag-input">
@@ -55,7 +65,7 @@
   	   </div>
 	 </div>
 	 
-	 <div id="write-footer">
+	 <div id="board-footer">
       	<input type="button" class="back-btn" value="목록으로" onclick="location.href='/board/list'">
       	<input type="button" class="submit-btn" value="저장">
      </div>
@@ -66,6 +76,12 @@
 // 제목 글자 수 체크
 $("#input-td > input").on("keyup", fn_checkByte);
 
+// 제목 input 입력 후 엔터로 인한 submit 방지
+$('input[name="title"]').keydown(function(e) {
+	  if (e.keyCode === 13) {
+	    e.preventDefault();
+	  };
+});
 </script>
 
 <!-- footer.jspf 불러오기 -->

@@ -128,4 +128,38 @@ public class BoardController {
 		md.addAttribute("detailRd", detailRd);
 		return "/board/detail";
 	}
+	
+	@RequestMapping("/board/modify")
+	public String showModify(int boardId, Model md, HttpServletResponse resp) throws Exception {
+		
+		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
+		
+		if(detailRd.isFail()) {
+			try {
+				Util.javaHistoryBack(resp, detailRd.getMsg());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// 수정하려는 카드의 기존 상태
+		md.addAttribute("detailRd", detailRd);
+		
+		return "/board/modify";
+	}
+	
+	@RequestMapping("/board/doModify")
+	@ResponseBody
+	public String doBoardModify(@ModelAttribute ForWriteBoard board, int boardId) throws Exception {
+		
+		board.setMemberId(1);
+		ResultData<Integer> modifyRd = boardService.doBoardModify(board, boardId);
+		
+		if(modifyRd.isFail()) {
+			return Util.jsHistoryBack(modifyRd.getMsg());
+		}
+		
+		//카드 수정 후 수정된 카드의 detail 페이지로 이동
+		return Util.jsReplace("", String.format("/board/detail?boardId=%d", modifyRd.getData())); 
+	}
 }

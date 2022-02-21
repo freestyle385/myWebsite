@@ -67,6 +67,6 @@ $(document).ready(function () {
 	    var value = marginTag().toString();
 	    $("#rdTag").val(value);
 		
-	    $("#write-form").submit();
+	    $("#table-wrap").submit();
 	  });
 });

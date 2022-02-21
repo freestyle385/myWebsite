@@ -11,7 +11,8 @@
 <%@ include file="../common/header.jspf"%>
 
 <!-- css / js -->
-<link rel="stylesheet" type="text/css" href="/resource/css/detail.css">
+<link rel="stylesheet" type="text/css" href="/resource/css/board-style.css">
+<link rel="stylesheet" type="text/css" href="/resource/css/comment-style.css">
 
 </head>
 
@@ -19,7 +20,7 @@
 <article>
 <section id="detail-wrap">
   <div id="table-wrap">
-  	<table id="board-detail">
+  	<table id="board-table">
 	    <colgroup>
 	      <col width="20%"/>
 	      <col width="10%"/>
@@ -47,8 +48,9 @@
 	    </tbody>
   	</table>
   </div>
+  
   <c:if test="${detailRd.getData().getHashtag().length() > 0}">
-  <div id="detail-tag">
+  <div id="board-hashtag">
   	<div id="tag-wrap">
 	    <!--  해시태그 목록   -->
 	    <ul id="tag-list">
@@ -60,7 +62,8 @@
   	</div>
   </div>
   </c:if>
-  <div id="detail-footer">
+  
+  <div id="board-footer">
     <input type="button" class="back-btn" value="목록으로" onclick="location.href='/board/list'">
     <div id="btn-wrap">
     	<div id="modify-btn"><a href="/board/modify?boardId=${detailRd.getData().getBoardId()}">수정하기</a></div>
@@ -70,19 +73,19 @@
 </section>  
 
 <section id="etc-wrap">
-	<div id="comment-wrap">
-		<div id="comment-count"><span id="get-count"></span> Comments</div>
-		<div id="write-box">
-			<form method="POST" id="write-form" class="comment-form">
+	<div id="comm-wrap">
+		<div id="comm-count"><span id="get-count"></span> Comments</div>
+		<div id="comm-write-box">
+			<form method="POST" class="comm-form">
 				<input type="hidden" name="boardId" value="${detailRd.getData().getBoardId()}"/>
-				<div class="comment-write"><textarea name="commBody" autocomplete="off" placeholder="댓글을 입력해주세요."></textarea></div>
+				<div class="comm-write"><textarea name="commBody" autocomplete="off" placeholder="댓글을 입력해주세요."></textarea></div>
 			</form>
-			<div class="btn-box">
-				<input type="button" class="write-btn" value="저장"/>
+			<div id="comm-form-btn">
+				<input type="button" id="comm-write-btn" value="저장"/>
 			</div>
 		</div>
 		<div id="list-box">
-			<ul id="comment-list"></ul>
+			<ul id="comm-list"></ul>
 		</div>
 	</div>
 	
@@ -96,9 +99,9 @@ $(document).ready(function () {
 	
 });
 
-$(".write-btn").on("click", function (e) {
+$("#comm-write-btn").on("click", function (e) {
 	// form 내용을 넣어 doCommentWrite ajax로 넘김
-	let insertData = $("#write-form").serialize();
+	let insertData = $(".comm-form").serialize();
     doCommWrite(insertData);
 });
 
@@ -112,7 +115,7 @@ function getCommList() {
 			"boardId" : boardId
 		},
 		success : function(data) {
-			$("#comment-list").empty();
+			$("#comm-list").empty();
 			
             $.each(data, function(key, value) { 
 				
@@ -122,7 +125,7 @@ function getCommList() {
 				str += '<div class="comm-btn-box"><a class="comm-btn btn1-' + value.commId + '" onclick="showCommModify(' + value.commId + ',\'' + value.commBody + '\');">수정</a>';
 				str += '<a class="comm-btn btn2-' + value.commId + '" onclick="doCommDelete(' + value.commId + ');">삭제</a></div></div>';
 				
-				$("#comment-list").append(str);
+				$("#comm-list").append(str);
             });
 
 		},
@@ -169,7 +172,7 @@ function doCommWrite(insertData) {
 // 댓글 수정화면
 function showCommModify(commId, commBody) {
 	
-	let a = '<div class="comment-form"><div class="comment-write"><textarea name="commBody-' + commId + '" autocomplete="off" placeholder="댓글을 입력해주세요.">' + commBody + '</textarea></div></div>';
+	let a = '<div class="comm-form"><div class="comm-write"><textarea name="commBody-' + commId + '" autocomplete="off" placeholder="댓글을 입력해주세요.">' + commBody + '</textarea></div></div>';
 	let b = '<a onclick="doCommModify(' + commId + ');">저장</a>';
 	let c = '<a onclick="getCommList();">취소</a>';
     

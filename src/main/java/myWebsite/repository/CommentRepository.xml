@@ -5,11 +5,11 @@
 	namespace="myWebsite.repository.CommentRepository">
 	
 	<select id="getCommentList" resultType="myWebsite.vo.Comment" parameterType="ArrayList">
-		SELECT * FROM `comment` WHERE boardId = #{boardId} ORDER BY commId DESC
+		SELECT * FROM `comment` WHERE delStatus = 0 AND boardId = #{boardId} ORDER BY commId DESC
 	</select>
 	
 	<select id="getCommentsCount" resultType="int">
-		SELECT COUNT(*) FROM `comment` WHERE boardId = #{boardId}
+		SELECT COUNT(*) FROM `comment` WHERE delStatus = 0 AND boardId = #{boardId}
 	</select>
 	
 	<insert id="doCommentWrite" parameterType="myWebsite.dto.ForWriteComment">
@@ -31,11 +31,13 @@
         UPDATE `comment`
         SET commBody = #{commBody},
         	updDate = NOW()
-        WHERE commId = #{commId}
+        WHERE delStatus = 0 AND commId = #{commId}
     </update>
 	
-	<delete id="doCommentDelete" parameterType="int">
-        DELETE FROM `comment` WHERE commId = #{commId}
-    </delete>
+	<update id="doCommentDelete" parameterType="int">
+        UPDATE `comment`
+        SET delStatus = 1
+        WHERE delStatus = 0 AND commId = #{commId}
+    </update>
 
 </mapper>

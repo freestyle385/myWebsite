@@ -16,6 +16,7 @@ import myWebsite.util.Util;
 import myWebsite.vo.Board;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class BoardService {
 	BoardRepository boardRepository;
 
@@ -66,7 +67,8 @@ public class BoardService {
 
 		return null;
 	}
-
+	
+	
 	public ResultData<Integer> doBoardWrite(ForWriteBoard board) throws Exception {
 
 		ArrayList<String> nullField = Util.fieldChk(board);
@@ -82,7 +84,6 @@ public class BoardService {
 		return new ResultData<Integer>("S", lastInsertId + "번 게시물 생성", lastInsertId);
 	}
 
-	@Transactional(rollbackFor = Exception.class)
 	public ResultData<Board> getBoardDetail(int boardId) throws Exception {
 		boardRepository.updateHitCnt(boardId);
 
@@ -107,6 +108,19 @@ public class BoardService {
 		boardRepository.doBoardModify(board, boardId);
 		
 		return new ResultData<Integer>("S", boardId + "번 글 수정", boardId);
+	}
+
+	public ResultData<String> doBoardDelete(int boardId) throws Exception {
+		
+		Board board = boardRepository.getBoardDetail(boardId);
+		
+		if (Util.emptyChk(board)) {
+			return new ResultData<String>("F", "해당 글은 존재하지 않습니다.");
+		}
+		
+		boardRepository.doBoardDelete(boardId);
+		
+		return new ResultData<String>("S", boardId + "번 글 삭제");
 	}
 
 }

@@ -22,7 +22,9 @@ public interface BoardRepository {
 
 	Board getBoardDetail(@Param("boardId") int boardId) throws Exception;
 
-	void updateHitCnt(int boardId) throws Exception;
+	void updateHitCnt(@Param("boardId") int boardId) throws Exception;
 
-	void doBoardModify(ForWriteBoard board, int boardId) throws Exception;
+	void doBoardModify(ForWriteBoard board, @Param("boardId") int boardId) throws Exception;
+
+	void doBoardDelete(@Param("boardId") int boardId);
 }

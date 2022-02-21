@@ -22,18 +22,8 @@ CREATE TABLE board
     regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',
     updDate DATETIME NOT NULL DEFAULT NOW() COMMENT '수정일',
     hitCnt INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '조회수',
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제 여부(미삭제=0, 삭제=1)',
     FOREIGN KEY (memberId) REFERENCES `member` (memberId)
-);
-
-CREATE TABLE `imgFile`
-(
-    imgId INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '이미지 인덱스',
-    boardId INT(10) UNSIGNED NOT NULL COMMENT '게시물 인덱스',
-    originalName VARCHAR(500) NOT NULL COMMENT '원본 이름',
-    storePath VARCHAR(500) NOT NULL COMMENT '저장 경로',
-    size INT(15) UNSIGNED NOT NULL COMMENT '용량',
-    regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',
-    FOREIGN KEY (boardId) REFERENCES board (boardId)
 );
 
 CREATE TABLE `comment`
@@ -44,6 +34,7 @@ CREATE TABLE `comment`
     commBody VARCHAR(200) NOT NULL COMMENT '내용',
     regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',
     updDate DATETIME NOT NULL DEFAULT NOW() COMMENT '수정일',
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제 여부(미삭제=0, 삭제=1)',
     FOREIGN KEY (boardId) REFERENCES board (boardId),
     FOREIGN KEY (memberId) REFERENCES `member` (memberId)
 );
@@ -67,80 +58,12 @@ VALUES
     0
 );
 
-INSERT INTO board
-(
-    boardId,
-    memberId,
-    title,
-    `body`,
-    hashtag,
-    regDate,
-    updDate,
-    hitCnt
-)
-values
-(
-    1,
-    1,
-    '제목1',
-    '내용1',
-    '안녕,반가워,이건,해시태그',
-    now(),
-    now(),
-    0
-)
-
-INSERT INTO board
-(
-    boardId,
-    memberId,
-    title,
-    `body`,
-    hashtag,
-    regDate,
-    updDate,
-    hitCnt
-)
-VALUES
-(
-    2,
-    1,
-    '제목2',
-    '내용2',
-    '안녕,해,시,태,그',
-    NOW(),
-    NOW(),
-    0
-)
-
-INSERT INTO board
-(
-    boardId,
-    memberId,
-    title,
-    `body`,
-    hashtag,
-    regDate,
-    updDate,
-    hitCnt
-)
-VALUES
-(
-    3,
-    1,
-    '제목3',
-    '내용3',
-    '안녕,해시,태,그',
-    NOW(),
-    NOW(),
-    0
-)
-
 SELECT * FROM `member`
 SELECT * FROM board
-SELECT count(*) FROM board
+SELECT * FROM `comment`
+SELECT COUNT(*) FROM board
 SELECT * FROM board WHERE hashtag LIKE CONCAT('%', '해시', '%')
-SELECT * FROM board where CONCAT(',',hashtag,',') LIKE concat('%,','해시',',%')
+SELECT * FROM board WHERE CONCAT(',',hashtag,',') LIKE CONCAT('%,','해시',',%')
 
 # 게시물 늘리기
 INSERT INTO board

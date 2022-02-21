@@ -162,4 +162,17 @@ public class BoardController {
 		//카드 수정 후 수정된 카드의 detail 페이지로 이동
 		return Util.jsReplace("", String.format("/board/detail?boardId=%d", modifyRd.getData())); 
 	}
+	
+	@RequestMapping("/board/doDelete")
+	@ResponseBody
+	public String doBoardDelete(int boardId, Model md, HttpServletResponse resp) throws Exception {
+		
+		ResultData<String> deleteRd = boardService.doBoardDelete(boardId);
+		
+		if(deleteRd.isFail()) {
+			return Util.jsHistoryBack(deleteRd.getMsg());
+		}
+		
+		return Util.jsReplace("", String.format("/board/list"));
+	}
 }

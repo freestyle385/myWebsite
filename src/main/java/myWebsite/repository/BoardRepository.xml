@@ -7,8 +7,9 @@
 	<select id="getBoardList" resultType="myWebsite.vo.Board" parameterType="ArrayList">
 		SELECT * FROM board
 		<where>
+			delStatus = 0
 			<if test="searchKeyword != null">
-				CONCAT(title, `body`) LIKE CONCAT('%', #{searchKeyword}, '%')
+				AND CONCAT(title, `body`) LIKE CONCAT('%', #{searchKeyword}, '%')
 			</if>
 			<if test="hashtagArr != null">
 				<foreach collection="hashtagArr" item="hashtag">
@@ -22,7 +23,7 @@
 	<select id="getAllHashtag" resultType="String">
 		SELECT GROUP_CONCAT(hashtag SEPARATOR ',') 
 		FROM board
-		WHERE hashtag != ''
+		WHERE delStatus = 0 AND hashtag != ''
 	</select>
 	
 	<insert id="doBoardWrite" parameterType="myWebsite.dto.ForWriteBoard">
@@ -53,14 +54,21 @@
 	</update>
 	
 	<select id="getBoardDetail" resultType="myWebsite.vo.Board">
-		SELECT * FROM board WHERE boardId = #{boardId}
+		SELECT * FROM board WHERE delStatus = 0 AND boardId = #{boardId}
 	</select>
 	
 	<update id="doBoardModify" parameterType="myWebsite.dto.ForWriteBoard">
 		UPDATE board
 		SET title = #{board.title},
 			`body` = #{board.body},
-			hashtag = #{board.hashtag}
-		WHERE boardId = #{boardId}
+			hashtag = #{board.hashtag},
+			updDate = NOW()
+		WHERE delStatus = 0 AND boardId = #{boardId}
+	</update>
+	
+	<update id="doBoardDelete" parameterType="int">
+		UPDATE board 
+		SET delStatus = 1
+		WHERE boardId = #{boardId};
 	</update>
 </mapper>

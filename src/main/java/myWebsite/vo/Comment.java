@@ -15,4 +15,5 @@ public class Comment {
 	private String commBody;
 	private String regDate;
 	private String updateDate;
+	private int delStatus;
 }

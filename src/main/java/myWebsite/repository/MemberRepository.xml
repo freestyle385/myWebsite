@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myWebsite.repository.MemberRepository">
+	<insert id="doMemberSignUp"
+		parameterType="myWebsite.dto.ForJoinMember">
+		INSERT INTO `member`
+		(
+			loginId,
+			loginPw,
+			memberName
+		)
+		VALUES
+		(
+			#{loginId},
+			#{loginPw},
+			#{memberName}
+		)
+	</insert>
+	
+	<select id="getMemberInfoByLoginId" resultType="myWebsite.vo.Member">
+		SELECT *
+		FROM `member`
+		WHERE delStatus = 0 AND loginId = #{loginId}
+	</select>
+	
+	<select id="loginIdChk" resultType="int">
+		SELECT COUNT(*) FROM `member`
+		WHERE loginId = #{loginId}
+	</select>
+	
+	<select id="loginPwChk" resultType="int">
+		SELECT COUNT(*) FROM `member`
+		WHERE loginId = #{loginId} AND loginPw = #{loginPw}
+	</select>
+</mapper>

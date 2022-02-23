@@ -29,7 +29,7 @@ import myWebsite.vo.Board;
 
 @Controller
 public class BoardController {
-	BoardService boardService;
+	private BoardService boardService;
 	
 	public BoardController(BoardService boardService) {
 		this.boardService = boardService;

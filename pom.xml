@@ -86,7 +86,7 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
-		
+
 		<!-- json 변환 라이브러리 jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -95,6 +95,12 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<!-- sha256 라이브러리 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
 		</dependency>
 
 	</dependencies>

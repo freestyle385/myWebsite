@@ -11,4 +11,5 @@ public class ForJoinMember {
 	// 회원 가입 시 필요한 데이터
 	private String loginId;
 	private String loginPw;
+	private String memberName;
 }

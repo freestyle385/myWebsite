@@ -25,7 +25,7 @@ public class MemberService {
 	}
 
 	public ResultData<String> doMemberSignUp(ForJoinMember member) throws Exception {
-
+		
 		// 사용될 닉네임은 이메일의 일부로 지정
 		String memberName = member.getLoginId().substring(0, member.getLoginId().indexOf("@"));
 		// dto에 비어있는 memberName을 채워줌
@@ -44,7 +44,7 @@ public class MemberService {
 
 		memberRepository.doMemberSignUp(member);
 
-		return new ResultData<String>("S", String.format("%s님 환영합니다!", memberName));
+		return new ResultData<String>("S", String.format("%s님, 회원가입이 완료되었습니다!", memberName));
 	}
 
 	public ResultData<String> doMemberLogin(ForJoinMember member) throws Exception {
@@ -70,7 +70,7 @@ public class MemberService {
 		Member loginedMember = memberRepository.getMemberInfoByLoginId(member.getLoginId());
 		loginStatus.login(loginedMember);
 
-		return new ResultData<String>("S", String.format("%s님 환영합니다!", memberName));
+		return new ResultData<String>("S", String.format("%s님, 환영합니다!", memberName));
 	}
 	
 	public ResultData<String> doMemberLogout() throws Exception {

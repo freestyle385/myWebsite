@@ -13,7 +13,9 @@ public class Member {
 	private String loginId;
 	private String loginPw;
 	private String memberName;
-	private int authLv;
 	private String regDate;
+	private String authKey; // 인증코드
+	private int authStatus; // 인증여부
+	private int authLv; // 권한레벨
 	private int delStatus;
 }

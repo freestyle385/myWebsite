@@ -18,6 +18,18 @@
 		)
 	</insert>
 	
+	<update id="createAuthKey">
+	    UPDATE `member`
+	    SET authKey = #{authKey} 
+	    WHERE loginId = #{loginId}
+	</update>
+  
+	<update id="updateAuthstatus">
+	    UPDATE `member` 
+	    SET authStatus = 1 
+	    WHERE loginId = #{loginId}
+	</update>
+	
 	<select id="getMemberInfoByLoginId" resultType="myWebsite.vo.Member">
 		SELECT *
 		FROM `member`

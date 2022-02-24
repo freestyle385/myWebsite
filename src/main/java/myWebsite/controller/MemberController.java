@@ -1,9 +1,10 @@
 package myWebsite.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import myWebsite.dto.ForJoinMember;
@@ -14,55 +15,74 @@ import myWebsite.util.Util;
 @Controller
 public class MemberController {
 	private MemberService memberService;
-	
-	@Autowired
-	public MemberController (MemberService memberService) {
+
+	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
-	
-	@RequestMapping("/member/signUp")
-	public String showMemberJoin() throws Exception {
 
-		return "member/join";
+	@RequestMapping("/member/signUp")
+	public String showMemberSignUp() throws Exception {
+
+		return "member/signUp";
 	}
-	
+
 	@RequestMapping("/member/doSignUp")
 	@ResponseBody
-	public String doMemberJoin(@ModelAttribute ForJoinMember member) throws Exception {
-		
+	public String doMemberSignUp(@ModelAttribute ForJoinMember member) throws Exception {
+
 		ResultData<String> signUpRd = memberService.doMemberSignUp(member);
-		
-		if(signUpRd.isFail()) {
+
+		if (signUpRd.isFail()) {
 			return Util.jsHistoryBack(signUpRd.getMsg());
 		}
-		
-		return Util.jsReplace(signUpRd.getMsg(), "/board/list");
+
+		return Util.jsReplace(signUpRd.getMsg(), "/");
 	}
 	
+	@RequestMapping("/member/emailConfirm")
+	@ResponseBody
+	public int emailConfirm(String loginId) throws Exception {
+		int result = memberService.loginIdChk(loginId);
+		
+		return result;
+	}
+
+	// 이메일에서 인증 클릭하면 나오는 경로
+	@RequestMapping(value = "/member/emailAuth", method = RequestMethod.GET)
+	public String emailAuth(String email, Model md) throws Exception {
+		// authStatus 권한 상태 1로 변경
+		memberService.updateAuthstatus(email);
+
+		md.addAttribute("loginId", email);
+
+		return "/member/emailConfirm";
+	}
+
 	@RequestMapping("/member/login")
 	public String showMemberLogin() throws Exception {
-		
+
 		return "/member/login";
 	}
-	
+
 	@RequestMapping("/member/doLogin")
 	@ResponseBody
 	public String doMemberLogin(@ModelAttribute ForJoinMember member) throws Exception {
-		
+
 		ResultData<String> loginRd = memberService.doMemberLogin(member);
-		
-		if(loginRd.isFail()) {
+
+		if (loginRd.isFail()) {
 			return Util.jsHistoryBack(loginRd.getMsg());
 		}
-		
-		return Util.jsReplace(loginRd.getMsg(), "/board/list");
-		
+
+		return Util.jsReplace(loginRd.getMsg(), "/");
+
 	}
-	
+
 	@RequestMapping("/member/doLogout")
 	@ResponseBody
 	public String doMemberLogout() throws Exception {
 		ResultData<String> logoutRd = memberService.doMemberLogout();
-		return Util.jsReplace(logoutRd.getMsg(), "/board/list");
+		return Util.jsReplace(logoutRd.getMsg(), "/");
 	}
+
 }

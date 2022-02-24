@@ -91,6 +91,8 @@
 	
 </section>  
 </article>
+<!-- footer.jspf 불러오기 -->
+<%@ include file="../common/footer.jspf"%>
 
 <script>
 $(document).ready(function () {
@@ -229,7 +231,5 @@ function doCommDelete(commId){
 
 </script>
 
-<!-- footer.jspf 불러오기 -->
-<%@ include file="../common/footer.jspf"%>
 </body>
 </html>

@@ -1,10 +1,6 @@
 /* board-style 시작 */
-#detail-wrap{
+#detail-wrap, #modify-wrap, #write-wrap{
   width: 100%;
-}
-#modify-wrap, #write-wrap{
-  width: 100%;
-  min-height: 62rem;	
 }
 #table-wrap{
   width: 80%;

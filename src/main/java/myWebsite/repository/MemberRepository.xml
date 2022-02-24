@@ -33,7 +33,7 @@
 	<select id="getMemberInfoByLoginId" resultType="myWebsite.vo.Member">
 		SELECT *
 		FROM `member`
-		WHERE delStatus = 0 AND loginId = #{loginId}
+		WHERE delStatus = 0 AND authStatus = 1 AND loginId = #{loginId}
 	</select>
 	
 	<select id="loginIdChk" resultType="int">

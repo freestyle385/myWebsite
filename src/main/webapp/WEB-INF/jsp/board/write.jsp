@@ -71,6 +71,8 @@
      </div>
   </section>
 </article>
+<!-- footer.jspf 불러오기 -->
+<%@ include file="../common/footer.jspf"%>
 
 <script>
 // 제목 글자 수 체크
@@ -84,7 +86,5 @@ $('input[name="title"]').keydown(function(e) {
 });
 </script>
 
-<!-- footer.jspf 불러오기 -->
-<%@ include file="../common/footer.jspf"%>
 </body>
 </html>

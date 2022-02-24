@@ -1,6 +1,5 @@
-#join-wrap{
+#join-wrap, #login-wrap{
   width: 100%;
-  min-height: 62rem;	
 }
 #table-wrap{
   width: 50%;

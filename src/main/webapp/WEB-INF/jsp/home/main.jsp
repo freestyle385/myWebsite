@@ -100,6 +100,8 @@
     </div>
   </section>
 </article>
+<!-- footer.jspf 불러오기 -->
+<%@ include file="../common/footer.jspf"%>
 
 <script>
 $(document).ready(function(){
@@ -122,7 +124,5 @@ $(document).ready(function(){
 });
 </script>
 
-<!-- footer.jspf 불러오기 -->
-<%@ include file="../common/footer.jspf"%>
 </body>
 </html>

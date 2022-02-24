@@ -1,7 +1,5 @@
 package myWebsite.service;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -11,7 +9,6 @@ import myWebsite.dto.ResultData;
 import myWebsite.repository.MemberRepository;
 import myWebsite.util.MailHandler;
 import myWebsite.util.Sha256;
-import myWebsite.util.Util;
 import myWebsite.vo.LoginStatus;
 import myWebsite.vo.Member;
 import myWebsite.vo.TempKey;
@@ -72,13 +69,6 @@ public class MemberService {
 		String memberName = member.getLoginId().substring(0, member.getLoginId().indexOf("@"));
 		member.setMemberName(memberName);
 
-		ArrayList<String> nullField = Util.fieldChk(member);
-
-		if (nullField.size() > 0) {
-			// 입력되지 않은 값 배열
-			return new ResultData<String>("F", "입력되지 않은 값이 있습니다.", String.join(",", nullField));
-		}
-
 		if (loginIdChk(member.getLoginId()) == 0) {
 			return new ResultData<String>("F", String.format("%s 계정은 존재하지 않습니다.", member.getLoginId()));
 		}
@@ -88,6 +78,10 @@ public class MemberService {
 		}
 
 		Member loginedMember = memberRepository.getMemberInfoByLoginId(member.getLoginId());
+		
+		if (loginedMember == null) {
+			return new ResultData<String>("F", "인증이 되지 않은 계정입니다. 이메일 인증을 진행해주세요.");
+		}
 		loginStatus.login(loginedMember);
 
 		return new ResultData<String>("S", String.format("%s님, 환영합니다!", memberName));

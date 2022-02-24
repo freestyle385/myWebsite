@@ -10,7 +10,7 @@
 <%@ include file="../common/header.jspf"%>
 
 <!-- css / js -->
-<link rel="stylesheet" type="text/css" href="/resource/css/signUp.css">
+<link rel="stylesheet" type="text/css" href="/resource/css/member-style.css">
 
 </head>
 
@@ -48,6 +48,8 @@
   	</div>
   </section>
 </article>
+<!-- footer.jspf 불러오기 -->
+<%@ include file="../common/footer.jspf"%>
 
 <script>
 $("#loginId-chk-btn").on("click", function (e) {
@@ -56,18 +58,11 @@ $("#loginId-chk-btn").on("click", function (e) {
 });
 
 $("#submit-btn").on("click", function (e) {
-	const loginId = $('input[name="loginId"]').val();
-	const loginIdChk = $('input[name="loginIdChk"]').val(1);
+	const loginIdChk = $('input[name="loginIdChk"]').val();
 	const loginPw = $('input[name="loginPw"]').val();
 	const loginPwChk = $('input[name="loginPwChk"]').val();
 	
-	if (loginId == '') {
-		alert("이메일이 입력되지 않았습니다.");
-		return;
-	} else if (!ChkEmail(loginId)) {
-		alert("이메일 형식이 올바르지 않습니다.");
-		return;
-	} else if (loginIdChk == 0) {
+	if (loginIdChk == 0) {
 		alert("이메일 중복확인을 진행해주세요.");
 		return;
 	} else if (loginPw == '' || loginPwChk == '') {
@@ -133,7 +128,5 @@ function ChkEmail(str) {
 
 </script>
 
-<!-- footer.jspf 불러오기 -->
-<%@ include file="../common/footer.jspf"%>
 </body>
 </html>

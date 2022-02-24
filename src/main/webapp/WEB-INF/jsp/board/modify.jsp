@@ -86,8 +86,9 @@
   		<input type="button" class="submit-btn" value="저장">
     </div>
 </section>  
-
 </article>
+<!-- footer.jspf 불러오기 -->
+<%@ include file="../common/footer.jspf"%>
 
 <script>
 // 제목 input 입력 후 엔터로 인한 submit 방지
@@ -187,7 +188,5 @@ $(document).ready(function(){
 
 </script>
 
-<!-- footer.jspf 불러오기 -->
-<%@ include file="../common/footer.jspf"%>
 </body>
 </html>

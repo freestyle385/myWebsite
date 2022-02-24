@@ -27,7 +27,7 @@ public class MemberService {
 	}
 
 	public ResultData<String> doMemberSignUp(ForJoinMember member) throws Exception {
-		
+
 		// 사용될 닉네임은 이메일의 일부로 지정
 		String memberName = member.getLoginId().substring(0, member.getLoginId().indexOf("@"));
 		// dto에 비어있는 memberName을 채워줌
@@ -78,7 +78,7 @@ public class MemberService {
 		}
 
 		Member loginedMember = memberRepository.getMemberInfoByLoginId(member.getLoginId());
-		
+
 		if (loginedMember == null) {
 			return new ResultData<String>("F", "인증이 되지 않은 계정입니다. 이메일 인증을 진행해주세요.");
 		}
@@ -94,6 +94,17 @@ public class MemberService {
 		loginStatus.logout();
 
 		return new ResultData<String>("S", String.format("%s님, 정상적으로 로그아웃되었습니다.", memberName));
+	}
+
+	public ResultData<String> doMemberWithdrawal() throws Exception {
+		
+		String memberName = loginStatus.getLoginedMember().getMemberName();
+		
+		memberRepository.doMemberWithdrawal(loginStatus.getLoginedMemberId());
+		
+		loginStatus.logout();
+		
+		return new ResultData<String>("S", String.format("%s님, 회원 탈퇴가 완료되었습니다.", memberName));
 	}
 
 	public int loginIdChk(String loginId) throws Exception {

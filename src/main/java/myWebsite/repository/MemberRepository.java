@@ -21,4 +21,6 @@ public interface MemberRepository {
 	public int loginIdChk(String loginId) throws Exception;
 
 	public int loginPwChk(String loginId, String loginPw) throws Exception;
+
+	public void doMemberWithdrawal(int memberId) throws Exception;
 }

@@ -84,5 +84,19 @@ public class MemberController {
 		ResultData<String> logoutRd = memberService.doMemberLogout();
 		return Util.jsReplace(logoutRd.getMsg(), "/");
 	}
+	
+	@RequestMapping("/member/withdraw")
+	public String showMemberWithdrawal() throws Exception {
+		return "/member/withdraw";
+	}
+	
+	@RequestMapping("/member/doWithdrawal")
+	@ResponseBody
+	public String doMemberWithdrawal() throws Exception {
+		ResultData<String> withdrawRd = memberService.doMemberWithdrawal();
+		return Util.jsReplace(withdrawRd.getMsg(), "/");
+	}
+	
+	
 
 }

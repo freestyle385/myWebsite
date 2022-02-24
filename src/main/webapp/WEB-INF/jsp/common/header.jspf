@@ -28,12 +28,27 @@
       <li class="menu cell">
          <a href="../board/list">BOARD</a>
       </li>
-      <li class="menu cell">
+      <c:if test="${loginedMember == null}">
+      	<li class="menu cell">
          <a href="../member/login">LOGIN</a>
-      </li>
-      <li class="menu cell">
+      	</li>
+      </c:if>
+      <c:if test="${loginedMember != null}">
+      	<li class="menu cell">
+         <a href="../member/doLogout">LOGOUT</a>
+      	</li>
+      </c:if>
+      <c:if test="${loginedMember == null}">
+      	<li class="menu cell">
          <a href="../member/signUp">SIGN UP</a>
-      </li>
+      	</li>
+      </c:if>
+      <c:if test="${loginedMember != null}">
+      	<li class="menu cell">
+         <a href="../member/withdraw">WITHDRAW</a>
+      	</li>
+      </c:if>
+      
     </ul>  
   </section>
 </header>

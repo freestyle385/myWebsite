@@ -35,7 +35,7 @@
       </c:if>
       <c:if test="${loginedMember != null}">
       	<li class="menu cell">
-         <a href="../member/doLogout">LOGOUT</a>
+         <a onclick="if (confirm('로그아웃 하시겠습니까?') == false) {return false};" href="../member/doLogout">LOGOUT</a>
       	</li>
       </c:if>
       <c:if test="${loginedMember == null}">
@@ -45,7 +45,7 @@
       </c:if>
       <c:if test="${loginedMember != null}">
       	<li class="menu cell">
-         <a href="../member/withdraw">WITHDRAW</a>
+         <a onclick="if (confirm('회원 탈퇴를 하시겠습니까?') == false) {return false};" href="../member/withdraw">WITHDRAW</a>
       	</li>
       </c:if>
       

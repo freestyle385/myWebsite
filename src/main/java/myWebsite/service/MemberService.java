@@ -3,6 +3,7 @@ package myWebsite.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import myWebsite.dto.ForJoinMember;
 import myWebsite.dto.ResultData;
@@ -14,6 +15,7 @@ import myWebsite.vo.Member;
 import myWebsite.vo.TempKey;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class MemberService {
 	@Autowired
 	private JavaMailSender mailSender;
@@ -65,10 +67,13 @@ public class MemberService {
 	}
 
 	public ResultData<String> doMemberLogin(ForJoinMember member) throws Exception {
-
+		
+		// 사용될 닉네임은 이메일의 일부로 지정
 		String memberName = member.getLoginId().substring(0, member.getLoginId().indexOf("@"));
+		// dto에 비어있는 memberName을 채워줌
 		member.setMemberName(memberName);
-
+		
+		// 계정 존재 여부와 비밀번호 일치 여부 체크
 		if (loginIdChk(member.getLoginId()) == 0) {
 			return new ResultData<String>("F", String.format("%s 계정은 존재하지 않습니다.", member.getLoginId()));
 		}
@@ -78,7 +83,8 @@ public class MemberService {
 		}
 
 		Member loginedMember = memberRepository.getMemberInfoByLoginId(member.getLoginId());
-
+		
+		// authStatus 인증 여부 체크
 		if (loginedMember == null) {
 			return new ResultData<String>("F", "인증이 되지 않은 계정입니다. 이메일 인증을 진행해주세요.");
 		}
@@ -88,7 +94,7 @@ public class MemberService {
 	}
 
 	public ResultData<String> doMemberLogout() throws Exception {
-
+		
 		String memberName = loginStatus.getLoginedMember().getMemberName();
 
 		loginStatus.logout();
@@ -96,7 +102,13 @@ public class MemberService {
 		return new ResultData<String>("S", String.format("%s님, 정상적으로 로그아웃되었습니다.", memberName));
 	}
 
-	public ResultData<String> doMemberWithdrawal() throws Exception {
+	public ResultData<String> doMemberWithdrawal(ForJoinMember member) throws Exception {
+		
+		member.setLoginId(loginStatus.getLoginedMember().getLoginId());
+		
+		if (loginPwChk(member) == 0) {
+			return new ResultData<String>("F", "비밀번호가 일치하지 않습니다.");
+		}
 		
 		String memberName = loginStatus.getLoginedMember().getMemberName();
 		

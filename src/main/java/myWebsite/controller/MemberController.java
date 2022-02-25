@@ -81,22 +81,33 @@ public class MemberController {
 	@RequestMapping("/member/doLogout")
 	@ResponseBody
 	public String doMemberLogout() throws Exception {
+		
 		ResultData<String> logoutRd = memberService.doMemberLogout();
+		
+		if (logoutRd.isFail()) {
+			return Util.jsHistoryBack(logoutRd.getMsg());
+		}
+		
 		return Util.jsReplace(logoutRd.getMsg(), "/");
 	}
 	
 	@RequestMapping("/member/withdraw")
 	public String showMemberWithdrawal() throws Exception {
+		
 		return "/member/withdraw";
 	}
 	
 	@RequestMapping("/member/doWithdrawal")
 	@ResponseBody
-	public String doMemberWithdrawal() throws Exception {
-		ResultData<String> withdrawRd = memberService.doMemberWithdrawal();
+	public String doMemberWithdrawal(@ModelAttribute ForJoinMember member) throws Exception {
+		
+		ResultData<String> withdrawRd = memberService.doMemberWithdrawal(member);
+		
+		if (withdrawRd.isFail()) {
+			return Util.jsHistoryBack(withdrawRd.getMsg());
+		}
+		
 		return Util.jsReplace(withdrawRd.getMsg(), "/");
 	}
-	
-	
 
 }

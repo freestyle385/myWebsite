@@ -59,17 +59,6 @@ $("#widhdrawal-btn").on("click", function (e) {
   	$("#table-wrap").submit();
 });
 
-//이메일 형식 체크 
-function ChkEmail(str) {                                                 
-     const chkEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-
-     if(!chkEmail.test(str)) {                            
-          return false;         
-     }                            
-     else {                       
-          return true;         
-     }                            
-}      
 </script>
 
 </body>

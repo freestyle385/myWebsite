@@ -64,6 +64,24 @@
   color: #ffffff;
   margin-top: 1rem;
 }
+#empty-btn{
+  width: 5rem;
+  height: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #a6a6a6;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #272559;
+  text-align: center;
+  line-height: 2rem;
+  color: #ffffff;
+  margin-top: 1rem; 	
+}
 #list-box{
   margin-top: 1rem;
   padding: 1rem;

@@ -126,6 +126,7 @@ public class BoardController {
 		}
 		
 		md.addAttribute("detailRd", detailRd);
+		
 		return "/board/detail";
 	}
 	
@@ -142,7 +143,7 @@ public class BoardController {
 			}
 		}
 		
-		// 수정하려는 카드의 기존 상태
+		// 수정하려는 게시물의 기존 내용
 		md.addAttribute("detailRd", detailRd);
 		
 		return "/board/modify";
@@ -152,7 +153,6 @@ public class BoardController {
 	@ResponseBody
 	public String doBoardModify(@ModelAttribute ForWriteBoard board, int boardId) throws Exception {
 		
-		board.setMemberId(1);
 		ResultData<Integer> modifyRd = boardService.doBoardModify(board, boardId);
 		
 		if(modifyRd.isFail()) {

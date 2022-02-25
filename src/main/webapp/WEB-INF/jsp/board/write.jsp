@@ -25,7 +25,7 @@
 </body>
 <article>
   <section id="write-wrap">
-    <form action="/board/doWrite?memberId=1&" method="POST" id="table-wrap">
+    <form action="/board/doWrite" method="POST" id="table-wrap">
       <table id="board-table">
       	<colgroup>
 	      <col width="20%"/>

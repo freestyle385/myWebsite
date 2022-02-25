@@ -10,12 +10,12 @@ import myWebsite.vo.Comment;
 
 @Service
 public class CommentService {
-	CommentRepository commentRepository;
+	private CommentRepository commentRepository;
 
 	public CommentService(CommentRepository commentRepository) {
 		this.commentRepository = commentRepository;
 	}
-
+	
 	public ArrayList<Comment> getCommentList(int boardId) throws Exception {
 		
 		return commentRepository.getCommentList(boardId);
@@ -27,13 +27,13 @@ public class CommentService {
 	}
 
 	public int doCommentWrite(ForWriteComment comment) throws Exception {
-
+		
 		return commentRepository.doCommentWrite(comment);
 	}
 
-	public int doCommentModify(int commId, String commBody) throws Exception {
-		
-		return commentRepository.doCommentModify(commId, commBody);
+	public int doCommentModify(String commBody, int commId) throws Exception {
+				
+		return commentRepository.doCommentModify(commBody, commId);
 	}
 
 	public int doCommentDelete(int commId) {

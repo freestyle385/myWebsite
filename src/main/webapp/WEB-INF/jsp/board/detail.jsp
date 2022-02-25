@@ -76,12 +76,19 @@
 	<div id="comm-wrap">
 		<div id="comm-count"><span id="get-count"></span> Comments</div>
 		<div id="comm-write-box">
+			<c:set var="loginedMember" value="${loginStatus.getLoginedMember()}"/>
 			<form method="POST" class="comm-form">
 				<input type="hidden" name="boardId" value="${detailRd.getData().getBoardId()}"/>
-				<div class="comm-write"><textarea name="commBody" autocomplete="off" placeholder="댓글을 입력해주세요."></textarea></div>
+				<input type="hidden" name="memberId" value="${loginStatus.getLoginedMemberId()}"/>
+				<div class="comm-write"><textarea name="commBody" autocomplete="off" placeholder="${loginedMember == null ? '로그인 후 이용해주세요.' : '댓글을 입력해주세요.'}"></textarea></div>
 			</form>
 			<div id="comm-form-btn">
+				<c:if test="${loginedMember != null}">
 				<input type="button" id="comm-write-btn" value="저장"/>
+				</c:if>
+				<c:if test="${loginedMember == null}">
+				<input type="button" id="empty-btn" value="저장"/>
+				</c:if>
 			</div>
 		</div>
 		<div id="list-box">
@@ -107,9 +114,15 @@ $("#comm-write-btn").on("click", function (e) {
     doCommWrite(insertData);
 });
 
+$("#empty-btn").on("click", function (e) {
+	alert("로그인 후 이용해주세요.");
+	$('[name=commBody]').val('');
+});
+
 // 댓글 리스트 불러오기
 function getCommList() {
 	let boardId = $("input[name=boardId]").val();
+	let loginedMemberId = $("input[name=memberId]").val();
 	$.ajax({
 		type : "GET",
 		url : "/comment/list",
@@ -120,12 +133,16 @@ function getCommList() {
 			$("#comm-list").empty();
 			
             $.each(data, function(key, value) { 
-				
+            	
 				let str = '<li class="comm-item"><div class="comm-writer">' + value.memberId + '</div>';
 				str += '<div class="comm-body content' + value.commId + '">' + value.commBody + '</div>';
 				str += '<div class="regDate-btn-wrap"><div class="comm-regDate">' + value.regDate + '</div>';
-				str += '<div class="comm-btn-box"><a class="comm-btn btn1-' + value.commId + '" onclick="showCommModify(' + value.commId + ',\'' + value.commBody + '\');">수정</a>';
-				str += '<a class="comm-btn btn2-' + value.commId + '" onclick="doCommDelete(' + value.commId + ');">삭제</a></div></div>';
+				if (loginedMemberId == value.memberId) {
+					str += '<div class="comm-btn-box comm-btn-box-' + value.commId + '"><a class="comm-btn btn1-' + value.commId + '" onclick="showCommModify(' + value.commId + ',\'' + value.commBody + '\');">수정</a>';
+					str += '<a class="comm-btn btn2-' + value.commId + '" onclick="doCommDelete(' + value.commId + ');">삭제</a></div></div></li>';
+				} else {
+					str += '</div></li>';
+				}
 				
 				$("#comm-list").append(str);
             });
@@ -175,12 +192,13 @@ function doCommWrite(insertData) {
 function showCommModify(commId, commBody) {
 	
 	let a = '<div class="comm-form"><div class="comm-write"><textarea name="commBody-' + commId + '" autocomplete="off" placeholder="댓글을 입력해주세요.">' + commBody + '</textarea></div></div>';
-	let b = '<a onclick="doCommModify(' + commId + ');">저장</a>';
-	let c = '<a onclick="getCommList();">취소</a>';
-    
+	let b = '<div class="comm-btn-box comm-btn-box-' + commId + '"><a class="comm-btn btn1-' + commId + '" onclick="doCommModify(' + commId + ');">저장</a>';
+	b += '<a class="comm-btn btn2-' + commId + '" onclick="getCommList();">취소</a></div>';
+	
     $('.content' + commId).html(a);
-    $('.btn1-' + commId).html(b);
-    $('.btn2-' + commId).html(c);
+    $('.btn1-' + commId).remove();
+    $('.btn2-' + commId).remove();
+    $('.comm-btn-box-' + commId).html(b);
     
 }
  

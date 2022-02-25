@@ -17,7 +17,7 @@ public interface CommentRepository {
 
 	int doCommentWrite(ForWriteComment comment) throws Exception;
 
-	int doCommentModify(@Param("commId") int commId, @Param("commBody") String commBody) throws Exception;
+	int doCommentModify(@Param("commBody") String commBody, @Param("commId") int commId) throws Exception;
 
 	int doCommentDelete(@Param("commId") int commId);
 }

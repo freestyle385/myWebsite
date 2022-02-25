@@ -14,14 +14,17 @@ import myWebsite.dto.ResultData;
 import myWebsite.repository.BoardRepository;
 import myWebsite.util.Util;
 import myWebsite.vo.Board;
+import myWebsite.vo.LoginStatus;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class BoardService {
-	BoardRepository boardRepository;
+	private BoardRepository boardRepository;
+	private LoginStatus loginStatus;
 
-	public BoardService(BoardRepository boardRepository) {
+	public BoardService(BoardRepository boardRepository, LoginStatus loginStatus) {
 		this.boardRepository = boardRepository;
+		this.loginStatus = loginStatus;
 	}
 
 	public ResultData<ArrayList<Board>> getBoardList(String hashtag, String searchKeyword) throws Exception {
@@ -70,7 +73,9 @@ public class BoardService {
 	
 	
 	public ResultData<Integer> doBoardWrite(ForWriteBoard board) throws Exception {
-
+		// 현재 로그인된 계정의 memberId를 추가 
+		board.setMemberId(loginStatus.getLoginedMemberId());
+		
 		ArrayList<String> nullField = Util.fieldChk(board);
 
 		if (nullField.size() > 0) {
@@ -97,6 +102,8 @@ public class BoardService {
 	}
 
 	public ResultData<Integer> doBoardModify(ForWriteBoard board, int boardId) throws Exception {
+		// 현재 로그인된 계정의 memberId를 추가 
+		board.setMemberId(loginStatus.getLoginedMemberId());
 		
 		ArrayList<String> nullField = Util.fieldChk(board);
 

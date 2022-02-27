@@ -70,4 +70,10 @@
 		SET delStatus = 1
 		WHERE boardId = #{boardId};
 	</update>
+	
+	<select id="getMemberIdByBoardId" parameterType="int" resultType="int">
+		SELECT memberId
+		FROM board
+		WHERE boardId = #{boardId}
+	</select>
 </mapper>

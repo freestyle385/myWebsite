@@ -130,4 +130,15 @@ public class BoardService {
 		return new ResultData<String>("S", boardId + "번 글 삭제");
 	}
 
+	public boolean isMemberAuthorized(int boardId) throws Exception {
+		
+		int result = boardRepository.getMemberIdByBoardId(boardId);
+		
+		if (loginStatus.getLoginedMemberId() == result) {
+			return true;
+		}
+		
+		return false;
+	}
+
 }

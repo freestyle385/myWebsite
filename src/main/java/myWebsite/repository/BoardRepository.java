@@ -26,5 +26,7 @@ public interface BoardRepository {
 
 	void doBoardModify(ForWriteBoard board, @Param("boardId") int boardId) throws Exception;
 
-	void doBoardDelete(@Param("boardId") int boardId);
+	void doBoardDelete(@Param("boardId") int boardId) throws Exception;
+
+	int getMemberIdByBoardId(@Param("boardId") int boardId) throws Exception;
 }

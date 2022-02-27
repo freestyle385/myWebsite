@@ -111,6 +111,11 @@ $(document).ready(function () {
 });
 
 $("#comm-write-btn").on("click", function (e) {
+	if ($("[name=commBody]").val() == "") {
+		alert("내용을 입력해주세요.");
+		return;
+	}
+	
 	// form 내용을 넣어 doCommentWrite ajax로 넘김
 	let insertData = $(".comm-form").serialize();
     doCommWrite(insertData);
@@ -118,7 +123,7 @@ $("#comm-write-btn").on("click", function (e) {
 
 $("#empty-btn").on("click", function (e) {
 	alert("로그인 후 이용해주세요.");
-	$('[name=commBody]').val('');
+	$("[name=commBody]").val("");
 });
 
 // 댓글 리스트 불러오기

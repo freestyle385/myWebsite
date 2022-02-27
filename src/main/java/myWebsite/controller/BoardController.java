@@ -30,11 +30,11 @@ import myWebsite.vo.Board;
 @Controller
 public class BoardController {
 	private BoardService boardService;
-	
+
 	public BoardController(BoardService boardService) {
 		this.boardService = boardService;
 	}
-	
+
 	@RequestMapping("/board/list")
 	public String showBoardList(String hashtag, String searchKeyword, @RequestParam(defaultValue = "1") int curPage,
 			Model md) throws Exception {
@@ -42,98 +42,103 @@ public class BoardController {
 		ResultData<ArrayList<Board>> listRd = boardService.getBoardList(hashtag, searchKeyword);
 		ResultData<ArrayList<Board>> subListRd = boardService.getSubBoardList(listRd, curPage);
 		SortedSet<String> allHashtag = boardService.getAllHashtag();
-		
+
 		md.addAttribute("listRd", listRd);
 		md.addAttribute("subListRd", subListRd);
 		md.addAttribute("allHashtag", allHashtag);
 		md.addAttribute("curPage", curPage);
-		
+
 		// 검색한 태그 및 키워드를 그대로 전달
 		md.addAttribute("searchedTag", hashtag);
 		if (searchKeyword != null) {
 			md.addAttribute("searchedKeyword", searchKeyword);
 		}
-		
+
 		return "/board/list";
 	}
-	
+
 	@RequestMapping("/board/write")
 	public String showBoardWrite() {
-		
+
 		return "/board/write";
-		
+
 	}
-	
+
 	@RequestMapping("/board/doWrite")
 	@ResponseBody
 	public String doBoardWrite(@ModelAttribute ForWriteBoard board) throws Exception {
-		
+
 		ResultData<Integer> writeRd = boardService.doBoardWrite(board);
-		
-		if(writeRd.isFail()) {
+
+		if (writeRd.isFail()) {
 			return Util.jsHistoryBack(writeRd.getMsg());
 		}
-		
+
 		return Util.jsReplace("", String.format("/board/detail?boardId=%d", writeRd.getData()));
 	}
-	
-	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
+
+	@PostMapping(value = "/uploadSummernoteImageFile", produces = "application/json")
 	@ResponseBody
 	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
-		
+
 		JsonObject jsonObject = new JsonObject();
-		
+
 		// 저장될 외부 파일 경로
 		String fileRoot = "C:\\summernote_image\\";
 		// 오리지널 파일명
 		String originalFileName = multipartFile.getOriginalFilename();
 		// 파일 확장자
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	
-		
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+
 		// 저장될 파일 명
-		String savedFileName = UUID.randomUUID() + extension;	
-		
-		File targetFile = new File(fileRoot + savedFileName);	
-		
+		String savedFileName = UUID.randomUUID() + extension;
+
+		File targetFile = new File(fileRoot + savedFileName);
+
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			// 파일 저장
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	
-			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);
+			jsonObject.addProperty("url", "/summernoteImage/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
-				
+
 		} catch (IOException e) {
 			// 저장된 파일 삭제
-			FileUtils.deleteQuietly(targetFile);	
+			FileUtils.deleteQuietly(targetFile);
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
-		
+
 		return jsonObject;
 	}
-	
+
 	@RequestMapping("/board/detail")
 	public String showBoardDetail(int boardId, Model md, HttpServletResponse resp) throws Exception {
-		
+
 		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
-		
-		if(detailRd.isFail()) {
+
+		if (detailRd.isFail()) {
 			try {
 				Util.javaHistoryBack(resp, detailRd.getMsg());
-			}catch (IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		md.addAttribute("detailRd", detailRd);
-		
+
 		return "/board/detail";
 	}
-	
+
 	@RequestMapping("/board/modify")
 	public String showModify(int boardId, Model md, HttpServletResponse resp) throws Exception {
 		
 		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
+		
+		if (!boardService.isMemberAuthorized(boardId)) {
+			Util.javaHistoryBack(resp, "수정할 권한이 없습니다.");
+			return "";
+		}
 		
 		if(detailRd.isFail()) {
 			try {
@@ -148,31 +153,35 @@ public class BoardController {
 		
 		return "/board/modify";
 	}
-	
+
 	@RequestMapping("/board/doModify")
 	@ResponseBody
 	public String doBoardModify(@ModelAttribute ForWriteBoard board, int boardId) throws Exception {
-		
+
 		ResultData<Integer> modifyRd = boardService.doBoardModify(board, boardId);
-		
-		if(modifyRd.isFail()) {
+
+		if (modifyRd.isFail()) {
 			return Util.jsHistoryBack(modifyRd.getMsg());
 		}
-		
-		//카드 수정 후 수정된 카드의 detail 페이지로 이동
-		return Util.jsReplace("", String.format("/board/detail?boardId=%d", modifyRd.getData())); 
+
+		// 카드 수정 후 수정된 카드의 detail 페이지로 이동
+		return Util.jsReplace("", String.format("/board/detail?boardId=%d", modifyRd.getData()));
 	}
-	
+
 	@RequestMapping("/board/doDelete")
 	@ResponseBody
-	public String doBoardDelete(int boardId, Model md, HttpServletResponse resp) throws Exception {
+	public String doBoardDelete(int boardId, Model md) throws Exception {
+		
+		if (!boardService.isMemberAuthorized(boardId)) {
+			return Util.jsHistoryBack("삭제할 권한이 없습니다.");
+		}
 		
 		ResultData<String> deleteRd = boardService.doBoardDelete(boardId);
 		
-		if(deleteRd.isFail()) {
+		if (deleteRd.isFail()) {
 			return Util.jsHistoryBack(deleteRd.getMsg());
 		}
-		
+
 		return Util.jsReplace("", String.format("/board/list"));
 	}
 }

@@ -45,8 +45,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		needLoginIr.addPathPatterns("/board/write").addPathPatterns("/board/doWrite").addPathPatterns("/board/modify")
 				.addPathPatterns("/board/doModify").addPathPatterns("/board/doDelete")
 				.addPathPatterns("/member/doLogout").addPathPatterns("/member/withdraw")
-				.addPathPatterns("/member/doWithdrawal").addPathPatterns("/comment/doWrite")
-				.addPathPatterns("/comment/doModify").addPathPatterns("/comment/doDelete");
+				.addPathPatterns("/member/doWithdrawal");
 
 		InterceptorRegistration needLogoutIr = registry.addInterceptor(needLogoutInterceptor);
 		needLogoutIr.addPathPatterns("/member/login").addPathPatterns("/member/doLogin")

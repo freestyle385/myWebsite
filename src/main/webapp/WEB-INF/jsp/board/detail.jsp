@@ -65,10 +65,12 @@
   
   <div id="board-footer">
     <input type="button" class="back-btn" value="목록으로" onclick="location.href='/board/list'">
+    <c:if test="${loginStatus.getLoginedMemberId() == detailRd.getData().getMemberId()}">
     <div id="btn-wrap">
     	<div id="modify-btn"><a href="/board/modify?boardId=${detailRd.getData().getBoardId()}">수정하기</a></div>
     	<div id="delete-btn"><a onclick="if (confirm('해당 글을 삭제하시겠습니까?') == false) {return false};" href="/board/doDelete?boardId=${detailRd.getData().getBoardId()}">삭제하기</a></div>
     </div>
+    </c:if>
   </div>
 </section>  
 

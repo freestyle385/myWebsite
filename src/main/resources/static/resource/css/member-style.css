@@ -80,6 +80,10 @@
   color: #ffffff;
   margin: 0 1rem;
 }
+#find-btn{
+  line-height: 2rem;
+  color: #a6a6a6;	
+}
 #submit-btn{
   width: 5rem;
   height: 2rem;

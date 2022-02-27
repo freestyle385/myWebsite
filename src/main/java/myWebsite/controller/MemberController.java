@@ -39,9 +39,10 @@ public class MemberController {
 		return Util.jsReplace(signUpRd.getMsg(), "/");
 	}
 	
-	@RequestMapping("/member/emailConfirm")
+	// 이메일 중복 체크
+	@RequestMapping("/member/emailDuplChk")
 	@ResponseBody
-	public int emailConfirm(String loginId) throws Exception {
+	public int emailDuplChk(String loginId) throws Exception {
 		int result = memberService.loginIdChk(loginId);
 		
 		return result;
@@ -109,5 +110,24 @@ public class MemberController {
 		
 		return Util.jsReplace(withdrawRd.getMsg(), "/");
 	}
+	
+	@RequestMapping("/member/forgotLoginPw")
+	public String forgotLoginPw() throws Exception {
 
+		return "/member/forgotLoginPw";
+	}
+	
+	@RequestMapping("/member/findLoginPw")
+	@ResponseBody
+	public String findLoginPw(String loginId) throws Exception {
+
+		ResultData<String> findRd = memberService.findLoginPw(loginId);
+
+		if (findRd.isFail()) {
+			return Util.jsHistoryBack(findRd.getMsg());
+		}
+
+		return Util.jsReplace(findRd.getMsg(), "/");
+	}
+	
 }

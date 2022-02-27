@@ -51,4 +51,10 @@
 	    SET delStatus = 1 
 	    WHERE delStatus = 0 AND memberId = #{memberId}
 	</update>
+	
+	<update id="updateLoginPw">
+	    UPDATE `member` 
+	    SET loginPw = #{ecryptPw}
+	    WHERE delStatus = 0 AND loginId = #{loginId}
+	</update>
 </mapper>

@@ -87,7 +87,7 @@ function ChkDupLoginId(loginId) {
 	}
 	
 	$.ajax({
-        url : '/member/emailConfirm',
+        url : '/member/emailDuplChk',
         type : 'post',
         data : {
 			"loginId" : loginId

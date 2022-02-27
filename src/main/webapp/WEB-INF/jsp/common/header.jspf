@@ -44,11 +44,14 @@
       	</li>
       </c:if>
       <c:if test="${loginedMember != null}">
-      	<li class="menu cell">
-         <a onclick="if (confirm('회원 탈퇴를 하시겠습니까?') == false) {return false};" href="../member/withdraw">WITHDRAW</a>
+      	<li id="my-page" class="menu cell">
+      	 MY PAGE
+      	 <ul>
+			<li><a href="/member/changeLoginPw">MY INFO</a></li>      	 	
+      	 	<li><a onclick="if (confirm('회원 탈퇴를 하시겠습니까?') == false) {return false};" href="../member/withdraw">WITHDRAW</a></li>
+      	 </ul>
       	</li>
       </c:if>
-      
     </ul>  
   </section>
 </header>

@@ -165,4 +165,20 @@ public class MemberService {
 		return new ResultData<String>("S", "임시 비밀번호가 발송되었습니다. 이메일을 확인해주세요.");
 	}
 
+	public ResultData<String> updateLoginPw(ForJoinMember member, String newLoginPw) throws Exception {
+
+		member.setLoginId(loginStatus.getLoginedMember().getLoginId());
+		member.setMemberName(loginStatus.getLoginedMember().getMemberName());
+		
+		if (loginPwChk(member) == 0) {
+			return new ResultData<String>("F", "이전 비밀번호가 일치하지 않습니다.");
+		}
+
+		// 새 비밀번호를 암호화하여 DB에 다시 저장
+		String ecryptPw = Sha256.encrypt(newLoginPw);
+		memberRepository.updateLoginPw(member.getLoginId(), ecryptPw);
+		
+		return new ResultData<String>("S", String.format("%s님, 비밀번호가 성공적으로 변경되었습니다.", member.getMemberName()));
+	}
+
 }

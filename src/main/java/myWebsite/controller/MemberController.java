@@ -130,4 +130,23 @@ public class MemberController {
 		return Util.jsReplace(findRd.getMsg(), "/");
 	}
 	
+	@RequestMapping("/member/changeLoginPw")
+	public String changeLoginPw() throws Exception {
+
+		return "/member/changeLoginPw";
+	}
+	
+	@RequestMapping("/member/updateLoginPw")
+	@ResponseBody
+	public String updateLoginPw(@ModelAttribute ForJoinMember member, String newLoginPw) throws Exception {
+
+		ResultData<String> updateRd = memberService.updateLoginPw(member, newLoginPw);
+
+		if (updateRd.isFail()) {
+			return Util.jsHistoryBack(updateRd.getMsg());
+		}
+
+		return Util.jsReplace(updateRd.getMsg(), "/");
+	}
+	
 }

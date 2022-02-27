@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,7 +94,6 @@ public class BoardService {
 	}
 
 	public ResultData<Board> getBoardDetail(int boardId) throws Exception {
-		boardRepository.updateHitCnt(boardId);
 
 		Board board = boardRepository.getBoardDetail(boardId);
 
@@ -99,6 +102,43 @@ public class BoardService {
 		}
 				
 		return new ResultData<Board>("S", boardId + "번 글 조회", board);
+	}
+
+	public void updateHitCnt(int boardId, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		Cookie[] cookies = req.getCookies();
+		int visitor = 0;
+		
+		for (Cookie cookie : cookies) {
+			
+			// visit 쿠키가 있는지(방문이력이 있는지) 확인
+			if (cookie.getName().equals("visit")) {
+				visitor = 1;
+				
+				if (cookie.getValue().contains(req.getParameter("boardId"))) {
+					System.out.println("게시물 id 정보 있음");
+				} else {
+					// visit 쿠키에 게시물 id 정보가 없다면 추가 후 조회수 증가
+					cookie.setValue(cookie.getValue() + "_" + req.getParameter("boardId"));
+					
+					// 만료기간은 24시간으로 설정
+					cookie.setMaxAge(60*60*24);
+					resp.addCookie(cookie);
+					boardRepository.updateHitCnt(boardId);
+				}
+				
+				// visit 쿠키 발견 즉시 for문 종료
+				break;
+			}
+		}
+		
+		// visit 쿠키가 없다면 쿠키를 만들고 조회수 증가
+		if (visitor == 0) {
+			Cookie cookie1 = new Cookie("visit", req.getParameter("boardId"));
+			// 만료기간은 24시간으로 설정
+			cookie1.setMaxAge(60*60*24);
+			resp.addCookie(cookie1);
+			boardRepository.updateHitCnt(boardId);
+		}
 	}
 
 	public ResultData<Integer> doBoardModify(ForWriteBoard board, int boardId) throws Exception {

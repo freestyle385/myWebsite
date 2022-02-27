@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -113,8 +114,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/detail")
-	public String showBoardDetail(int boardId, Model md, HttpServletResponse resp) throws Exception {
-
+	public String showBoardDetail(int boardId, Model md, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		boardService.updateHitCnt(boardId, req, resp);
+		
 		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
 
 		if (detailRd.isFail()) {
@@ -133,12 +136,12 @@ public class BoardController {
 	@RequestMapping("/board/modify")
 	public String showModify(int boardId, Model md, HttpServletResponse resp) throws Exception {
 		
-		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
-		
 		if (!boardService.isMemberAuthorized(boardId)) {
 			Util.javaHistoryBack(resp, "수정할 권한이 없습니다.");
-			return "";
+			return null;
 		}
+		
+		ResultData<Board> detailRd = boardService.getBoardDetail(boardId);
 		
 		if(detailRd.isFail()) {
 			try {

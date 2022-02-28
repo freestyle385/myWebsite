@@ -17,7 +17,7 @@
 </body>
 <article>
   <section id="login-wrap">
-  	<form action="/member/doLogin" method="POST" id="table-wrap">
+  	<form action="/member/resendEmail" method="POST" id="table-wrap">
   		<table id="member-table">
   			<colgroup>
 			    <col width="40%"/>
@@ -25,22 +25,20 @@
 		    </colgroup>
 		    <tbody>
 		    	<tr>
-		    		<th scope="row">아이디(이메일)</th>
-		    		<td class="input-td"><input type="text" id="loginId" name="loginId" autocomplete="off" placeholder="이메일을 입력해주세요."/></td>
+		    		<th colspan="2">입력하신 아이디로 인증 메일이 재전송됩니다</th>
 		    	</tr>
 		    	<tr>
-		    		<th scope="row">비밀번호</th>
-		    		<td colspan="2" class="input-td"><input type="password" class="loginPw" name="loginPw" autocomplete="off" placeholder="비밀번호를 입력해주세요."/></td>
+		    		<th scope="row">아이디</th>
+		    		<td colspan="2" class="input-td"><input type="text" id="loginId" name="loginId" autocomplete="off" placeholder="이메일을 입력해주세요."/></td>
 		    	</tr>
 		    </tbody>
   		</table>
   	</form>
   	<div id="member-footer">
 	    <input type="button" id="back-btn" value="홈으로" onclick="location.href='/'">
-	    <a href="/member/forgotLoginPw" class="etc-btn">비밀번호 찾기</a>
-	    <a href="/member/needAuth" class="etc-btn">인증 메일 재발송</a>
-	    <input type="button" id="submit-btn" value="로그인"/>
+	    <input type="button" id="submit-btn" value="메일발송"/>
   	</div>
+  	
   </section>
 </article>
 <!-- footer.jspf 불러오기 -->
@@ -49,16 +47,12 @@
 <script>
 $("#submit-btn").on("click", function (e) {
 	const loginId = $('input[name="loginId"]').val();
-	const loginPw = $('input[name="loginPw"]').val();
 	
 	if (loginId == '') {
-		alert("아이디(이메일)이 입력되지 않았습니다.");
+		alert("아이디가 입력되지 않았습니다.");
 		return;
 	} else if (!ChkEmail(loginId)) {
 		alert("이메일 형식이 올바르지 않습니다.");
-		return;
-	} else if (loginPw == '') {
-		alert("비밀번호가 입력되지 않았습니다.");
 		return;
 	}
 	
@@ -75,7 +69,8 @@ function ChkEmail(str) {
      else {                       
           return true;         
      }                            
-}      
+}  
+
 </script>
 
 </body>

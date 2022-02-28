@@ -57,4 +57,9 @@
 	    SET loginPw = #{ecryptPw}
 	    WHERE delStatus = 0 AND loginId = #{loginId}
 	</update>
+	
+	<select id="authChk" resultType="int">
+		SELECT authStatus FROM `member`
+		WHERE delStatus = 0 AND loginId = #{loginId}
+	</select>
 </mapper>

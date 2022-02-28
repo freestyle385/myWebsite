@@ -149,4 +149,23 @@ public class MemberController {
 		return Util.jsReplace(updateRd.getMsg(), "/");
 	}
 	
+	@RequestMapping("/member/needAuth")
+	public String needAuth() throws Exception {
+
+		return "/member/needAuth";
+	}
+	
+	@RequestMapping("/member/resendEmail")
+	@ResponseBody
+	public String resendEmail(String loginId) throws Exception {
+
+		ResultData<String> resendRd = memberService.sendAuthEmail(loginId);
+
+		if (resendRd.isFail()) {
+			return Util.jsHistoryBack(resendRd.getMsg());
+		}
+
+		return Util.jsReplace(resendRd.getMsg(), "/");
+	}
+	
 }

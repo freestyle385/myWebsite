@@ -42,22 +42,7 @@ public class MemberService {
 		// 회원 정보 저장
 		memberRepository.doMemberSignUp(member);
 
-		// 인증코드 생성
-		String key = new TempKey().getKey(10, false);
-
-		// 인증코드 DB에 저장
-		memberRepository.createAuthKey(member.getLoginId(), key);
-
-		// 메일 발송
-		MailHandler sendMail = new MailHandler(mailSender);
-
-		sendMail.setSubject("[HYS's Portfolio 회원가입 이메일 인증입니다.]");
-		sendMail.setText(new StringBuffer().append("<h1>HYS's Portfolio 이메일 인증 입니다</h1>")
-				.append("<a href='http://localhost:8080/member/emailAuth?email=").append(member.getLoginId())
-				.append("&key=").append(key).append("' target='_blank'>인증 완료를 위해 여기를 눌러주세요</a>").toString());
-		sendMail.setFrom("freestyle4583@gmail.com", "HYS's Portfolio");
-		sendMail.setTo(member.getLoginId());
-		sendMail.send();
+		sendEmail(member.getLoginId());
 
 		return new ResultData<String>("S", String.format("%s님, 회원가입이 완료되었습니다. 인증을 위해 이메일을 확인해주세요.", memberName));
 	}
@@ -119,29 +104,16 @@ public class MemberService {
 		return new ResultData<String>("S", String.format("%s님, 회원 탈퇴가 완료되었습니다.", memberName));
 	}
 
-	public int loginIdChk(String loginId) throws Exception {
-		// DB에 같은 아이디가 존재하는지 체크
-		int result = memberRepository.loginIdChk(loginId);
-
-		return result;
-	}
-
-	private int loginPwChk(ForJoinMember member) throws Exception {
-
-		// 비밀번호를 암호화
-		String ecryptPw = Sha256.encrypt(member.getLoginPw());
-
-		// 입력된 비밀번호가 DB에 저장된 비밀번호와 일치하는지 체크
-		int result = memberRepository.loginPwChk(member.getLoginId(), ecryptPw);
-
-		return result;
-	}
-
 	public ResultData<String> findLoginPw(String loginId) throws Exception {
 
 		// 계정 존재 여부 체크
 		if (loginIdChk(loginId) == 0) {
 			return new ResultData<String>("F", String.format("%s 계정은 존재하지 않습니다.", loginId));
+		}
+		
+		// 계정 인증 여부 체크
+		if (authChk(loginId) == 0) {
+			return new ResultData<String>("F", "인증이 되지 않은 계정입니다. 이메일 인증을 진행해주세요.");
 		}
 
 		// 임시 비밀번호 생성
@@ -169,7 +141,7 @@ public class MemberService {
 
 		member.setLoginId(loginStatus.getLoginedMember().getLoginId());
 		member.setMemberName(loginStatus.getLoginedMember().getMemberName());
-		
+
 		if (loginPwChk(member) == 0) {
 			return new ResultData<String>("F", "이전 비밀번호가 일치하지 않습니다.");
 		}
@@ -177,8 +149,69 @@ public class MemberService {
 		// 새 비밀번호를 암호화하여 DB에 다시 저장
 		String ecryptPw = Sha256.encrypt(newLoginPw);
 		memberRepository.updateLoginPw(member.getLoginId(), ecryptPw);
-		
+
 		return new ResultData<String>("S", String.format("%s님, 비밀번호가 성공적으로 변경되었습니다.", member.getMemberName()));
+	}
+
+	public ResultData<String> sendAuthEmail(String loginId) throws Exception {
+
+		// 계정 존재 여부 체크
+		if (loginIdChk(loginId) == 0) {
+			return new ResultData<String>("F", String.format("%s 계정은 존재하지 않습니다.", loginId));
+		}
+		
+		// 계정 인증 여부 체크
+		if (authChk(loginId) == 1) {
+			return new ResultData<String>("F", String.format("%s 계정은 이미 인증이 완료되었습니다.", loginId));
+		}
+
+		sendEmail(loginId);
+
+		return new ResultData<String>("S", "인증 이메일이 재발송되었습니다. 이메일을 확인해주세요.");
+	}
+
+	private int authChk(String loginId) throws Exception {
+		// DB에 같은 아이디가 존재하는지 체크
+		int result = memberRepository.authChk(loginId);
+		
+		return result;
+	}
+
+	public int loginIdChk(String loginId) throws Exception {
+		// DB에 같은 아이디가 존재하는지 체크
+		int result = memberRepository.loginIdChk(loginId);
+
+		return result;
+	}
+
+	private int loginPwChk(ForJoinMember member) throws Exception {
+
+		// 비밀번호를 암호화
+		String ecryptPw = Sha256.encrypt(member.getLoginPw());
+
+		// 입력된 비밀번호가 DB에 저장된 비밀번호와 일치하는지 체크
+		int result = memberRepository.loginPwChk(member.getLoginId(), ecryptPw);
+
+		return result;
+	}
+
+	private void sendEmail(String loginId) throws Exception {
+		// 인증코드 생성
+		String key = new TempKey().getKey(10, false);
+
+		// 인증코드 DB에 저장
+		memberRepository.createAuthKey(loginId, key);
+
+		// 메일 발송
+		MailHandler sendMail = new MailHandler(mailSender);
+
+		sendMail.setSubject("[HYS's Portfolio 회원가입 이메일 인증입니다.]");
+		sendMail.setText(new StringBuffer().append("<h1>HYS's Portfolio 이메일 인증 입니다</h1>")
+				.append("<a href='http://localhost:8080/member/emailAuth?email=").append(loginId).append("&key=")
+				.append(key).append("' target='_blank'>인증 완료를 위해 여기를 눌러주세요</a>").toString());
+		sendMail.setFrom("freestyle4583@gmail.com", "HYS's Portfolio");
+		sendMail.setTo(loginId);
+		sendMail.send();
 	}
 
 }

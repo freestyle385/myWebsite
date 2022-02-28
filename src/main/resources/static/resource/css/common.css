@@ -94,6 +94,7 @@ article{
 }
 #my-page > ul{
   background-color: #f8f9fa;
+  box-shadow: 1px 2px 2px #272559;
   font-size: 0.8rem;
   font-weight: normal;
   display: none;

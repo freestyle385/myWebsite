@@ -88,6 +88,7 @@
   border-top: 2px solid #99aff2;
   border-bottom: 1px solid #99aff2;
   background-color: #c4d4f2;
+  margin-bottom: 2rem;
 }
 #comm-list{
   width: 100%;
@@ -139,5 +140,19 @@
   line-height: 2rem;
   color: #ffffff;
   margin: 0.25rem 0.5rem;
+}
+#page-nav{
+  width: 20%;
+  margin: 0 auto;
+}
+#page-list{
+  display: flex;
+  justify-content: center;
+}
+#page-list > li{
+  padding: 0 0.5rem;	
+}
+#page-list > li > a:hover, #page-list > li > a:focus{
+  color: red;	
 }
 /* comment-wrap 끝 */

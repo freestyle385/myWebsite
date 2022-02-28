@@ -96,6 +96,13 @@
 		<div id="list-box">
 			<ul id="comm-list"></ul>
 		</div>
+		<div id="list-footer">
+	        <nav id="page-nav">
+	          <ul id="page-list">
+	          	
+	          </ul>
+	        </nav>
+      </div>
 	</div>
 	
 </section>  
@@ -127,19 +134,24 @@ $("#empty-btn").on("click", function (e) {
 });
 
 // 댓글 리스트 불러오기
-function getCommList() {
+function getCommList(curPage) {
 	let boardId = $("input[name=boardId]").val();
 	let loginedMemberId = $("input[name=memberId]").val();
 	$.ajax({
 		type : "GET",
 		url : "/comment/list",
 		data : {
-			"boardId" : boardId
+			"boardId" : boardId,
+			"curPage" : curPage
 		},
 		success : function(data) {
 			$("#comm-list").empty();
 			
-            $.each(data, function(key, value) { 
+			const data1 = data.subCommList;
+			const data2 = data.pagesCount;
+			const data3 = data.curPage;
+			
+            $.each(data1, function(key, value) { 
             	
 				let str = '<li class="comm-item"><div class="comm-writer">' + value.writerName + '</div>';
 				str += '<div class="comm-body content' + value.commId + '">' + value.commBody + '</div>';
@@ -153,7 +165,35 @@ function getCommList() {
 				
 				$("#comm-list").append(str);
             });
-
+            
+            //페이지 네비게이션 생성
+            const pageNavArmLen = 4;
+        	let startPage = data3 - pageNavArmLen >= 1 ? data3 - pageNavArmLen : 1;
+        	let endPage = data3 + pageNavArmLen <= data2 ? data3 + pageNavArmLen : data2;
+        	let str='';
+        	
+        	if (startPage > 1) {
+        		// 항상 존재하는 1페이지
+        		str += '<li><a onclick="getCommList(' + i +');">1</a></li>';
+        		// curPage 위치상 보이지 않는 페이지는 ...로 표시
+        		if (startPage > 2) {
+        			str += '<li>...</li>';
+        		}
+        	}
+        	// 현재 페이지에서 앞뒤로 4개씩 표시
+        	for (var i = startPage; i <= endPage; i++) {
+        		str += '<li><a onclick="getCommList(' + i +');">' + i + '</a></li>'
+        	}
+        	if (endPage < data2) {
+        		// curPage 위치상 보이지 않는 페이지는 ...로 표시
+        		if (endPage < data2 - 1) {
+        			str += '<li>...</li>';
+        		}
+        		// 항상 존재하는 마지막 페이지
+        		str += '<li><a onclick="getCommList(' + data2 +');">' + data2 + '</a></li>';
+        	}
+        	$("#page-list").empty();
+        	$("#page-list").append(str);
 		},
 		error : function() {
 			alert('다시 시도해주세요.');

@@ -1,6 +1,6 @@
 package myWebsite.controller;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import myWebsite.dto.ForWriteComment;
 import myWebsite.service.CommentService;
-import myWebsite.vo.Comment;
 
 @Controller
 public class CommentController {
@@ -22,9 +21,11 @@ public class CommentController {
 
 	@RequestMapping("/comment/list")
 	@ResponseBody
-	private ArrayList<Comment> showCommentList(@RequestParam("boardId") int boardId) throws Exception {
+	private Map<String, Object> showCommentList(@RequestParam("boardId") int boardId, @RequestParam(defaultValue = "1") int curPage) throws Exception {
 		
-		return commentService.getCommentList(boardId);
+		Map<String, Object> resultMap = commentService.getCommentList(boardId, curPage);
+				
+		return resultMap;
 	}
 	
 	@RequestMapping("/comment/getCommentsCount")

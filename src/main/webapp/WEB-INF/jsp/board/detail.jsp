@@ -141,7 +141,7 @@ function getCommList() {
 			
             $.each(data, function(key, value) { 
             	
-				let str = '<li class="comm-item"><div class="comm-writer">' + value.memberId + '</div>';
+				let str = '<li class="comm-item"><div class="comm-writer">' + value.writerName + '</div>';
 				str += '<div class="comm-body content' + value.commId + '">' + value.commBody + '</div>';
 				str += '<div class="regDate-btn-wrap"><div class="comm-regDate">' + value.regDate + '</div>';
 				if (loginedMemberId == value.memberId) {

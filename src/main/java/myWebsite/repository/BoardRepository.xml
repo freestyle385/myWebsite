@@ -53,7 +53,9 @@
 	</update>
 	
 	<select id="getBoardDetail" resultType="myWebsite.vo.Board">
-		SELECT * FROM board WHERE delStatus = 0 AND boardId = #{boardId}
+		SELECT * 
+		FROM board 
+		WHERE delStatus = 0 AND boardId = #{boardId}
 	</select>
 	
 	<update id="doBoardModify" parameterType="myWebsite.dto.ForWriteBoard">

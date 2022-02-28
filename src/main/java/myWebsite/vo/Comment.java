@@ -16,4 +16,6 @@ public class Comment {
 	private String regDate;
 	private String updateDate;
 	private int delStatus;
+	
+	private String writerName;
 }

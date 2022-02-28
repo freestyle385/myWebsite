@@ -5,7 +5,12 @@
 	namespace="myWebsite.repository.CommentRepository">
 	
 	<select id="getCommentList" resultType="myWebsite.vo.Comment" parameterType="ArrayList">
-		SELECT * FROM `comment` WHERE delStatus = 0 AND boardId = #{boardId} ORDER BY commId DESC
+		SELECT C.*,
+		M.memberName AS writerName	 
+		FROM `comment` AS C
+		LEFT JOIN `member` AS M
+		ON C.memberId = M.memberId
+		WHERE C.delStatus = 0 AND C.boardId = #{boardId} ORDER BY C.commId DESC
 	</select>
 	
 	<select id="getCommentsCount" resultType="int">

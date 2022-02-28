@@ -103,18 +103,19 @@
   width: 100%;
   font-size: 1.2rem;
   font-weight: bold;
-  padding: 0.5rem 0;
+  color: #454545;
+  padding: 0.8rem 0;
 }
 .comm-body{
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 }
 .regDate-btn-wrap{
   display: flex;
 }
 .comm-regDate{
   width: 50%;
-  padding: 0.5rem 0;	
+  padding: 0.8rem 0;	
 }
 .comm-btn-box{
   width: 50%;

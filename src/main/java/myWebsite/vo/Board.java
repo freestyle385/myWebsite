@@ -18,4 +18,5 @@ public class Board {
 	private String updateDate;
 	private int hitCnt;
 	private int delStatus;
+	
 }

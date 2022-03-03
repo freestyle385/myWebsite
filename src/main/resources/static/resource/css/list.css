@@ -157,9 +157,10 @@
   justify-content: center;
 }
 #page-nav > ul > li{
-  padding: 0 0.5rem;	
+  padding: 0 0.5rem;
+  cursor: pointer;	
 }
-#page-nav > ul > li > a:hover, #page-nav > ul > li > a:focus{
+#page-nav > ul > li > a:hover{
   color: red;	
 }
 /* list-wrap 끝 */

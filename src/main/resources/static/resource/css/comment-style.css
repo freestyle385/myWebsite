@@ -150,9 +150,10 @@
   justify-content: center;
 }
 #page-list > li{
-  padding: 0 0.5rem;	
+  padding: 0 0.5rem;
+  cursor: pointer;	
 }
-#page-list > li > a:hover, #page-list > li > a:focus{
+#page-list > li > a:hover{
   color: red;	
 }
 /* comment-wrap 끝 */

@@ -174,7 +174,7 @@ function getCommList(curPage) {
         	
         	if (startPage > 1) {
         		// 항상 존재하는 1페이지
-        		str += '<li><a onclick="getCommList(' + i +');">1</a></li>';
+        		str += '<li><a class="list-1" onclick="getCommList(1);">1</a></li>';
         		// curPage 위치상 보이지 않는 페이지는 ...로 표시
         		if (startPage > 2) {
         			str += '<li>...</li>';
@@ -182,7 +182,7 @@ function getCommList(curPage) {
         	}
         	// 현재 페이지에서 앞뒤로 4개씩 표시
         	for (var i = startPage; i <= endPage; i++) {
-        		str += '<li><a onclick="getCommList(' + i +');">' + i + '</a></li>'
+        		str += '<li><a class="list-' + i + '" onclick="getCommList(' + i +');">' + i + '</a></li>'
         	}
         	if (endPage < data2) {
         		// curPage 위치상 보이지 않는 페이지는 ...로 표시
@@ -190,10 +190,11 @@ function getCommList(curPage) {
         			str += '<li>...</li>';
         		}
         		// 항상 존재하는 마지막 페이지
-        		str += '<li><a onclick="getCommList(' + data2 +');">' + data2 + '</a></li>';
+        		str += '<li><a class="list-' + data2 + '" onclick="getCommList(' + data2 +');">' + data2 + '</a></li>';
         	}
         	$("#page-list").empty();
         	$("#page-list").append(str);
+        	$(".list-" + data3).css("color","red");
 		},
 		error : function() {
 			alert('다시 시도해주세요.');
@@ -252,6 +253,11 @@ function showCommModify(commId, commBody) {
 // 댓글 수정
 function doCommModify(commId) {
     let updateContent = $('[name=commBody-' + commId + ']').val();
+    
+    if (updateContent == "") {
+    	alert("내용을 입력해주세요.");
+    	return;
+    }
     
     $.ajax({
         url : '/comment/doModify',

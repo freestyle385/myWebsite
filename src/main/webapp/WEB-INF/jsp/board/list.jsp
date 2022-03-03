@@ -93,7 +93,7 @@
 	          
 	          <!-- 항상 존재하는 1페이지 -->
 	          <c:if test="${startPage > 1}">
-	          	<li><a href="${pageBaseUri}&curPage=1">1</a></li>
+	          	<li><a class="list-1" href="${pageBaseUri}&curPage=1">1</a></li>
 	          	
 	          	<!-- curPage 위치상 보이지 않는 페이지는 ...로 표시  -->
 	            <c:if test="${startPage > 2}">
@@ -104,7 +104,7 @@
 	          
 	          <!-- 현재 페이지에서 앞뒤로 4개씩 표시 -->
 	          <c:forEach var="pageNum" begin="${startPage}" end="${endPage}" varStatus="pageStatus">
-	          	<li><a href="${pageBaseUri}&curPage=${pageNum}">${pageNum}</a></li>
+	          	<li><a class="list-${pageNum}" href="${pageBaseUri}&curPage=${pageNum}">${pageNum}</a></li>
 	          </c:forEach>
 	          
 	          <c:if test="${endPage < subListRd.getExtraData()}">
@@ -114,7 +114,7 @@
 	            </c:if>
 	            
 		        <!-- 항상 존재하는 마지막 페이지 -->  
-	          	<a href="${pageBaseUri}&curPage=${subListRd.getExtraData()}">${subListRd.getExtraData()}</a>
+	          	<a class="list-${subListRd.getExtraData()}" href="${pageBaseUri}&curPage=${subListRd.getExtraData()}">${subListRd.getExtraData()}</a>
 	          </c:if>
 	          </ul>
 	        </nav>
@@ -126,7 +126,10 @@
 <%@ include file="../common/footer.jspf"%>
 
 <script>
-
+$(document).ready(function () {
+	const curPage = "${curPage}"
+	$(".list-" + curPage).css("color","red");
+});
 </script>
 
 </body>

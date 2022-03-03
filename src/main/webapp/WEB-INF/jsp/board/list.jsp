@@ -30,6 +30,7 @@
               </c:forEach>
             </c:if>
           </select>
+          <div id="filter-msg"><span>우측 검색 버튼을 눌러주세요</span></div>
         </div>
       </div>
       <!-- 검색창 -->
@@ -79,7 +80,9 @@
 	        </tbody>
 	    </table>
 	    <div id="list-footer">
-	        <div id="write-btn"><a href="/board/write">글쓰기</a></div>
+	    	<c:if test="${loginStatus.getAuthLv() == 1}">
+	    	<div id="write-btn"><a href="/board/write">글쓰기</a></div>
+	    	</c:if>
 	        <nav id="page-nav">
 	          <ul>
 	          <!-- 페이지 이동 시 기존 파라미터가 날아가지 않도록 저장 -->

@@ -27,13 +27,16 @@ import myWebsite.dto.ResultData;
 import myWebsite.service.BoardService;
 import myWebsite.util.Util;
 import myWebsite.vo.Board;
+import myWebsite.vo.LoginStatus;
 
 @Controller
 public class BoardController {
 	private BoardService boardService;
+	private LoginStatus loginStatus;
 
-	public BoardController(BoardService boardService) {
+	public BoardController(BoardService boardService, LoginStatus loginStatus) {
 		this.boardService = boardService;
+		this.loginStatus = loginStatus;
 	}
 
 	@RequestMapping("/board/list")
@@ -59,7 +62,12 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/write")
-	public String showBoardWrite() {
+	public String showBoardWrite(HttpServletResponse resp) throws Exception {
+		int authLv = loginStatus.getAuthLv();
+		if (authLv == 0) {
+			Util.javaHistoryBack(resp, "관리자만 게시물 작성이 가능합니다.");
+			return null;
+		}
 
 		return "/board/write";
 
@@ -136,7 +144,7 @@ public class BoardController {
 	@RequestMapping("/board/modify")
 	public String showModify(int boardId, Model md, HttpServletResponse resp) throws Exception {
 		
-		if (!boardService.isMemberAuthorized(boardId)) {
+		if (!boardService.memberAuthChk(boardId)) {
 			Util.javaHistoryBack(resp, "수정할 권한이 없습니다.");
 			return null;
 		}
@@ -175,7 +183,7 @@ public class BoardController {
 	@ResponseBody
 	public String doBoardDelete(int boardId, Model md) throws Exception {
 		
-		if (!boardService.isMemberAuthorized(boardId)) {
+		if (!boardService.memberAuthChk(boardId)) {
 			return Util.jsHistoryBack("삭제할 권한이 없습니다.");
 		}
 		

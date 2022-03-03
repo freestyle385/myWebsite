@@ -47,8 +47,8 @@ public class MemberService {
 		return new ResultData<String>("S", String.format("%s님, 회원가입이 완료되었습니다. 인증을 위해 이메일을 확인해주세요.", memberName));
 	}
 
-	public void updateAuthstatus(String loginId) throws Exception {
-		memberRepository.updateAuthstatus(loginId);
+	public void updateAuthStatus(String loginId) throws Exception {
+		memberRepository.updateAuthStatus(loginId);
 	}
 
 	public ResultData<String> doMemberLogin(ForJoinMember member) throws Exception {
@@ -110,9 +110,9 @@ public class MemberService {
 		if (loginIdChk(loginId) == 0) {
 			return new ResultData<String>("F", String.format("%s 계정은 존재하지 않습니다.", loginId));
 		}
-		
+
 		// 계정 인증 여부 체크
-		if (authChk(loginId) == 0) {
+		if (authStatusChk(loginId) == 0) {
 			return new ResultData<String>("F", "인증이 되지 않은 계정입니다. 이메일 인증을 진행해주세요.");
 		}
 
@@ -159,9 +159,9 @@ public class MemberService {
 		if (loginIdChk(loginId) == 0) {
 			return new ResultData<String>("F", String.format("%s 계정은 존재하지 않습니다.", loginId));
 		}
-		
+
 		// 계정 인증 여부 체크
-		if (authChk(loginId) == 1) {
+		if (authStatusChk(loginId) == 1) {
 			return new ResultData<String>("F", String.format("%s 계정은 이미 인증이 완료되었습니다.", loginId));
 		}
 
@@ -170,10 +170,10 @@ public class MemberService {
 		return new ResultData<String>("S", "인증 이메일이 재발송되었습니다. 이메일을 확인해주세요.");
 	}
 
-	private int authChk(String loginId) throws Exception {
-		// DB에 같은 아이디가 존재하는지 체크
-		int result = memberRepository.authChk(loginId);
-		
+	private int authStatusChk(String loginId) throws Exception {
+		// 계정 인증 여부 체크
+		int result = memberRepository.authStatusChk(loginId);
+
 		return result;
 	}
 

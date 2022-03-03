@@ -39,6 +39,11 @@
   border-radius: 4px;
   box-shadow: 1px 1px 3px #272559;
 }
+#filter-msg{
+  margin-top: 0.5rem;
+  color: #a6a6a6;	
+  font-size: 0.8rem;
+}
 #searchKeyword-box{
   display: flex;
   flex-flow: row nowrap;

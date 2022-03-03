@@ -19,6 +19,8 @@ public class LoginStatus {
 	private int loginedMemberId;
 	@Getter
 	private Member loginedMember;
+	@Getter
+	private int authLv;
 
 	private HttpServletRequest req;
 	private HttpSession session;
@@ -34,6 +36,7 @@ public class LoginStatus {
 			this.isLogined = true;
 			this.loginedMember = member;
 			this.loginedMemberId = loginedMember.getMemberId();
+			this.authLv = loginedMember.getAuthLv();
 		}
 
 		this.req.setAttribute("loginStatus", this);

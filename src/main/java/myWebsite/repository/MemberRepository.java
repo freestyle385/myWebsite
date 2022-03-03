@@ -14,7 +14,7 @@ public interface MemberRepository {
 	public void createAuthKey(String loginId, String authKey) throws Exception;
 
 	// 이메일 인증 후 authstatus 1로 변경
-	public void updateAuthstatus(String loginId) throws Exception;
+	public void updateAuthStatus(String loginId) throws Exception;
 
 	public Member getMemberInfoByLoginId(String loginId) throws Exception;
 
@@ -26,5 +26,5 @@ public interface MemberRepository {
 
 	public void updateLoginPw(String loginId, String ecryptPw) throws Exception;
 
-	public int authChk(String loginId) throws Exception;
+	public int authStatusChk(String loginId) throws Exception;
 }

@@ -24,7 +24,7 @@
 	    WHERE delStatus = 0 AND loginId = #{loginId}
 	</update>
   
-	<update id="updateAuthstatus">
+	<update id="updateAuthStatus">
 	    UPDATE `member` 
 	    SET authStatus = 1 
 	    WHERE delStatus = 0 AND loginId = #{loginId}
@@ -58,7 +58,7 @@
 	    WHERE delStatus = 0 AND loginId = #{loginId}
 	</update>
 	
-	<select id="authChk" resultType="int">
+	<select id="authStatusChk" resultType="int">
 		SELECT authStatus FROM `member`
 		WHERE delStatus = 0 AND loginId = #{loginId}
 	</select>

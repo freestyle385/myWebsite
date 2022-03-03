@@ -52,7 +52,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/emailAuth", method = RequestMethod.GET)
 	public String emailAuth(String email, Model md) throws Exception {
 		// authStatus 권한 상태 1로 변경
-		memberService.updateAuthstatus(email);
+		memberService.updateAuthStatus(email);
 
 		md.addAttribute("loginId", email);
 

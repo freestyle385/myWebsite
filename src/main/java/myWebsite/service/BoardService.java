@@ -74,12 +74,11 @@ public class BoardService {
 
 		return null;
 	}
-	
-	
+
 	public ResultData<Integer> doBoardWrite(ForWriteBoard board) throws Exception {
-		// 현재 로그인된 계정의 memberId를 추가 
+		// 현재 로그인된 계정의 memberId를 추가
 		board.setMemberId(loginStatus.getLoginedMemberId());
-		
+
 		ArrayList<String> nullField = Util.fieldChk(board);
 
 		if (nullField.size() > 0) {
@@ -100,85 +99,86 @@ public class BoardService {
 		if (Util.emptyChk(board)) {
 			return new ResultData<Board>("F", "해당 글은 존재하지 않습니다.");
 		}
-				
+
 		return new ResultData<Board>("S", boardId + "번 글 조회", board);
 	}
 
 	public void updateHitCnt(int boardId, HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		Cookie[] cookies = req.getCookies();
 		int visitor = 0;
-		
+
 		for (Cookie cookie : cookies) {
-			
+
 			// visit 쿠키가 있는지(방문이력이 있는지) 확인
 			if (cookie.getName().equals("visit")) {
 				visitor = 1;
-				
+
 				if (cookie.getValue().contains(req.getParameter("boardId"))) {
 					System.out.println("게시물 id 정보 있음");
 				} else {
 					// visit 쿠키에 게시물 id 정보가 없다면 추가 후 조회수 증가
 					cookie.setValue(cookie.getValue() + "_" + req.getParameter("boardId"));
-					
+
 					// 만료기간은 24시간으로 설정
-					cookie.setMaxAge(60*60*24);
+					cookie.setMaxAge(60 * 60 * 24);
 					resp.addCookie(cookie);
 					boardRepository.updateHitCnt(boardId);
 				}
-				
+
 				// visit 쿠키 발견 즉시 for문 종료
 				break;
 			}
 		}
-		
+
 		// visit 쿠키가 없다면 쿠키를 만들고 조회수 증가
 		if (visitor == 0) {
 			Cookie cookie1 = new Cookie("visit", req.getParameter("boardId"));
 			// 만료기간은 24시간으로 설정
-			cookie1.setMaxAge(60*60*24);
+			cookie1.setMaxAge(60 * 60 * 24);
 			resp.addCookie(cookie1);
 			boardRepository.updateHitCnt(boardId);
 		}
 	}
 
 	public ResultData<Integer> doBoardModify(ForWriteBoard board, int boardId) throws Exception {
-		// 현재 로그인된 계정의 memberId를 추가 
+		// 현재 로그인된 계정의 memberId를 추가
 		board.setMemberId(loginStatus.getLoginedMemberId());
-		
+
 		ArrayList<String> nullField = Util.fieldChk(board);
 
 		if (nullField.size() > 0) {
 			// 입력되지 않은 값 배열
 			return new ResultData<Integer>("F", "입력되지 않은 값이 있습니다.", nullField.size(), String.join(",", nullField));
 		}
-		
+
 		boardRepository.doBoardModify(board, boardId);
-		
+
 		return new ResultData<Integer>("S", boardId + "번 글 수정", boardId);
 	}
 
 	public ResultData<String> doBoardDelete(int boardId) throws Exception {
-		
+
 		Board board = boardRepository.getBoardDetail(boardId);
-		
+
 		if (Util.emptyChk(board)) {
 			return new ResultData<String>("F", "해당 글은 존재하지 않습니다.");
 		}
-		
+
 		boardRepository.doBoardDelete(boardId);
-		
+
 		return new ResultData<String>("S", boardId + "번 글 삭제");
 	}
+	
+	// 게시물 수정, 삭제 권한 체크(작성자 only)
+	public boolean memberAuthChk(int boardId) throws Exception {
 
-	public boolean isMemberAuthorized(int boardId) throws Exception {
-		
 		int result = boardRepository.getMemberIdByBoardId(boardId);
-		
+
 		if (loginStatus.getLoginedMemberId() == result) {
 			return true;
 		}
-		
+
 		return false;
 	}
-
+	
 }

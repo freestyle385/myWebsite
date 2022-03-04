@@ -48,7 +48,9 @@
 	
 	<update id="doMemberWithdrawal">
 	    UPDATE `member` 
-	    SET delStatus = 1 
+	    SET delStatus = 1,
+	    	loginId = CONCAT('deleted_',RAND()),
+    		memberName = 'Deleted Account' 
 	    WHERE delStatus = 0 AND memberId = #{memberId}
 	</update>
 	

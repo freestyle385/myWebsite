@@ -74,7 +74,10 @@
             </c:forEach>
 	        	<c:if test="${listRd.getData().size() == 0}">
               <tr>
-                <td colspan="4">조회된 결과가 없습니다.</td>
+              	<td></td>
+                <td>조회된 결과가 없습니다.</td>
+                <td></td>
+                <td></td>
               </tr>
             </c:if>
 	        </tbody>

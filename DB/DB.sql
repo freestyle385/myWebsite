@@ -5,10 +5,13 @@ USE myWebsite;
 CREATE TABLE `member`
 (
     memberId INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '작성자 인덱스',
-    loginId VARCHAR(100) NOT NULL COMMENT '이메일 아이디',
+    loginId VARCHAR(100) NOT NULL UNIQUE KEY COMMENT '이메일 아이디',
     loginPw VARCHAR(100) NOT NULL COMMENT '비밀번호',
+    memberName VARCHAR(100) NOT NULL COMMENT '닉네임(이메일 추출)',
+    regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',    
+    authKey VARCHAR(20) COMMENT '인증 코드',
+    authStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '인증 여부(미인증=0, 인증=1)',    
     authLv TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '권한 레벨(회원=0, 관리자=1)',
-    regDate DATETIME NOT NULL DEFAULT NOW() COMMENT '생성일',
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부(미탈퇴=0, 탈퇴=1)'
 );
 
@@ -44,23 +47,29 @@ INSERT INTO `member`
     memberId,
     loginId,
     loginPw,
-    authLv,
+    memberName,
     regDate,
+    authKey,
+    authStatus,
+    authLv,
     delStatus
 )
 VALUES
 (
-    1,
-    'admin',
-    'admin',
-    1,
+    12,
+    'test1@gmail.com',
+    SHA2('test1', 256),
+    'test1',
     NOW(),
+    '1123123',
+    1,
+    0,
     0
 );
 
 SELECT * FROM `member`
 SELECT * FROM board
-SELECT * FROM `comment`
+SELECT * FROM `comment` WHERE delStatus = 0
 SELECT COUNT(*) FROM board
 SELECT * FROM board WHERE hashtag LIKE CONCAT('%', '해시', '%')
 SELECT * FROM board WHERE CONCAT(',',hashtag,',') LIKE CONCAT('%,','해시',',%')
@@ -74,3 +83,12 @@ SELECT 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND()), '', NOW(), NOW()
 FROM board;
 
 SELECT FLOOR(RAND() * 999 + 1);
+
+UPDATE `member`
+SET delStatus = 1
+WHERE loginId = 'freestyle385@naver.com'
+
+UPDATE `member`
+SET loginId = CONCAT('deleted_',RAND()),
+    memberName = 'Deleted Account'
+WHERE loginId = 'freestyle385@naver.com'

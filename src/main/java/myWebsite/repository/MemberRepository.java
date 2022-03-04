@@ -27,4 +27,6 @@ public interface MemberRepository {
 	public void updateLoginPw(String loginId, String ecryptPw) throws Exception;
 
 	public int authStatusChk(String loginId) throws Exception;
+
+	public int memberAuthKeyChk(String loginId, String authKey) throws Exception;
 }

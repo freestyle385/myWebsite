@@ -76,7 +76,11 @@ public class BoardController {
 	@RequestMapping("/board/doWrite")
 	@ResponseBody
 	public String doBoardWrite(@ModelAttribute ForWriteBoard board) throws Exception {
-
+		int authLv = loginStatus.getAuthLv();
+		if (authLv == 0) {
+			return Util.jsHistoryBack("관리자만 게시물 작성이 가능합니다.");
+		}
+		
 		ResultData<Integer> writeRd = boardService.doBoardWrite(board);
 
 		if (writeRd.isFail()) {
@@ -168,7 +172,11 @@ public class BoardController {
 	@RequestMapping("/board/doModify")
 	@ResponseBody
 	public String doBoardModify(@ModelAttribute ForWriteBoard board, int boardId) throws Exception {
-
+		if (!boardService.memberAuthChk(boardId)) {
+			Util.jsHistoryBack("수정할 권한이 없습니다.");
+			return null;
+		}
+		
 		ResultData<Integer> modifyRd = boardService.doBoardModify(board, boardId);
 
 		if (modifyRd.isFail()) {

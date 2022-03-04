@@ -169,6 +169,13 @@ public class MemberService {
 
 		return new ResultData<String>("S", "인증 이메일이 재발송되었습니다. 이메일을 확인해주세요.");
 	}
+	
+	public int memberAuthKeyChk(String loginId, String authKey) throws Exception {
+		// authKey 일치 여부 체크
+		int result = memberRepository.memberAuthKeyChk(loginId, authKey);
+		
+		return result;
+	}
 
 	private int authStatusChk(String loginId) throws Exception {
 		// 계정 인증 여부 체크

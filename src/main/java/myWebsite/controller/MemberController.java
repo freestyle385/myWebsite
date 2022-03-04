@@ -1,5 +1,7 @@
 package myWebsite.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -50,7 +52,14 @@ public class MemberController {
 
 	// 이메일에서 인증 클릭하면 나오는 경로
 	@RequestMapping(value = "/member/emailAuth", method = RequestMethod.GET)
-	public String emailAuth(String email, Model md) throws Exception {
+	public String emailAuth(String email, String key, Model md, HttpServletResponse resp) throws Exception {
+		
+		// authKey가 일치하지 않으면 0, 일치하면 1 
+		if (memberService.memberAuthKeyChk(email, key) == 0) {
+			Util.javaHistoryBack(resp, "해당 이메일로는 계정을 인증할 수 없습니다.");
+			return null;
+		}
+		
 		// authStatus 권한 상태 1로 변경
 		memberService.updateAuthStatus(email);
 

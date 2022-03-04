@@ -64,4 +64,9 @@
 		SELECT authStatus FROM `member`
 		WHERE delStatus = 0 AND loginId = #{loginId}
 	</select>
+	
+	<select id="memberAuthKeyChk" resultType="int">
+		SELECT COUNT(*) FROM `member`
+		WHERE delStatus = 0 AND loginId = #{loginId} AND authKey = #{authKey}
+	</select>
 </mapper>

@@ -14,37 +14,37 @@
 </head>
 <body>
 <header>
-  <section id="top-bar-wrap" class="row">
-    <div id="logo-box" class="cell">
+  <section id="top-bar-wrap">
+    <div id="logo-box">
       <h2><a href="/home">Heo Yoonseok</a></h2>
     </div>
-    <ul id="nav-bar" class="cell-r row">
-      <li class="menu cell">
+    <ul id="nav-bar">
+      <li class="menu">
         <a href="../about">ABOUT</a>
       </li>
-      <li class="menu cell">
+      <li class="menu">
          <a href="#">PROJECTS</a>
       </li>
-      <li class="menu cell">
+      <li class="menu">
          <a href="../board/list">BOARD</a>
       </li>
       <c:if test="${loginedMember == null}">
-      	<li class="menu cell">
+      	<li class="menu">
          <a href="../member/login">LOGIN</a>
       	</li>
       </c:if>
       <c:if test="${loginedMember != null}">
-      	<li class="menu cell">
+      	<li class="menu">
          <a onclick="if (confirm('로그아웃 하시겠습니까?') == false) {return false};" href="../member/doLogout">LOGOUT</a>
       	</li>
       </c:if>
       <c:if test="${loginedMember == null}">
-      	<li class="menu cell">
+      	<li class="menu">
          <a href="../member/signUp">SIGN UP</a>
       	</li>
       </c:if>
       <c:if test="${loginedMember != null}">
-      	<li id="my-page" class="menu cell">
+      	<li id="my-page" class="menu">
       	 MY PAGE
       	 <ul>
 			<li><a href="/member/changeLoginPw">MY INFO</a></li>      	 	

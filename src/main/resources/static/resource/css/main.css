@@ -164,4 +164,14 @@
 .skill-logo > img{
   margin: 1.5rem 1.5rem;	
 }
+#skill-be{
+  display: flex;
+  margin: 0 auto;	
+}
+@media screen and (max-width: 970px) {
+	 #skill-be{
+	  display: flex;
+	  flex-direction: column;	
+	}
+}
 /* about-summary 끝 */

@@ -65,6 +65,8 @@ article{
   background-color: #f8f9fa;
   color: #454545;
   box-shadow: 1px 2px 4px #272559;
+  display: flex;
+  justify-content: space-between;
 }
 #logo-box{
   font-size: 1.2rem;
@@ -73,6 +75,8 @@ article{
 }
 #nav-bar{
   height: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 #nav-bar > .menu{
   height: 100%;
@@ -86,7 +90,7 @@ article{
 #nav-bar > .menu:last-child{
   width: 8rem;
   padding: 0;
-  margin-right: 5rem;
+  margin-right: 3.5rem;
 }
 #my-page{
   display: block;
@@ -110,6 +114,68 @@ article{
 }
 #my-page > ul > li:hover {
   color: inherit;
+}
+@media screen and (max-width: 964px) {
+	 html{
+	 	font-size: 11px;
+	 }
+	 #nav-bar > .menu{
+	 padding: 0 1rem;
+	 }
+}
+@media screen and (max-width: 768px) {
+	header{
+	  margin-bottom: 10rem;
+	}
+	#top-bar-wrap{
+	  height: 10rem;	
+	  flex-direction: column; 
+	}
+	#logo-box{
+	  font-size: 1.2rem;
+	  line-height: 5rem;
+	  margin: 0 5rem;
+	}
+	#nav-bar{
+	  height: 100%;
+	}
+	#nav-bar > .menu{
+	  height: 100%;
+	  text-align: center;
+	  font-size: 1rem;
+	  font-weight: 700;
+	  line-height: 5rem;
+	  padding: 0 1.5rem;
+	  cursor: pointer;
+	}
+	#nav-bar > .menu:last-child{
+	  width: 8rem;
+	  padding: 0;
+	  margin-right: 0;
+	}
+	#my-page{
+	  display: block;
+	  cursor: pointer;
+	}
+	#my-page > ul{
+	  background-color: #f8f9fa;
+	  box-shadow: 1px 2px 2px #272559;
+	  font-size: 0.8rem;
+	  font-weight: normal;
+	  display: none;
+	}
+	#my-page:hover > ul{
+	  display: block;
+	}
+	#my-page > ul > li{
+	  width: 8rem;
+	}
+	#my-page > ul:hover > li{
+	  color: #f2f2f2;
+	}
+	#my-page > ul > li:hover {
+	  color: inherit;
+	}
 }
 /* top-bar 끝 */
 /* footer 시작 */

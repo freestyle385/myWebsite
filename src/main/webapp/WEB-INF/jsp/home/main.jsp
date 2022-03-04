@@ -85,12 +85,16 @@
           	<img src="/resource/img/fe_logo_1.png" style="height: 80px;"/>
           	<img src="/resource/img/fe_logo_2.png" style="height: 80px;"/>
           </div>
-          <div id="skill-be" class="skill-logo">
+          <div id="skill-be">
+          	<div id="skill-be-1" class="skill-logo">
           	<img src="/resource/img/be_logo_1.png" style="height: 80px;"/>
           	<img src="/resource/img/be_logo_2.svg" style="height: 80px;"/>
           	<img src="/resource/img/be_logo_3.png" style="height: 80px;"/>
+          </div>
+          <div id="skill-be-2" class="skill-logo">
           	<img src="/resource/img/be_logo_4.png" style="height: 80px;"/>
           	<img src="/resource/img/be_logo_5.png" style="height: 80px;"/>
+          </div>
           </div>
           <div id="skill-devops" class="skill-logo">
           	<img src="/resource/img/devops_logo_1.png" style="height: 80px;"/>

@@ -43,7 +43,7 @@
 	        <td colspan="6"><span id="title-span">${detailRd.getData().getTitle()}</span></td>
 	      </tr>
 	      <tr>
-	        <td colspan="6">${detailRd.getData().getBody()}</td>
+	        <td id="detail-body" colspan="6">${detailRd.getData().getBody()}</td>
 	      </tr>
 	    </tbody>
   	</table>

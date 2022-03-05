@@ -84,6 +84,7 @@ $('input[name="title"]').keydown(function(e) {
 	    e.preventDefault();
 	  };
 });
+
 </script>
 
 </body>

@@ -33,6 +33,14 @@
 #board-table tbody textarea{
   width: 100%; 
 }
+#detail-body a{
+  color: blue;
+  text-decoration: underline;  	
+}
+#detail-body a:visited{
+  color: purple;
+  text-decoration: underline;  	
+}
 #title-span{
   font-size: 1.2rem;
   font-weight: bold;

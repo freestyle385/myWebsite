@@ -10,15 +10,15 @@
 <%@ include file="../common/header.jspf"%>
 
 <!-- css / js -->
-<link rel="stylesheet" type="text/css" href="/resource/css/about.css">
+<link rel="stylesheet" type="text/css" href="/resource/css/home-style.css">
 </head>
 
 </body>
 <article>
   <section id="about-wrap">
-    <div id="about-title"><span>ABOUT</span></div>
-    <div id="open-btn" class="active">개발 이전의 이력이 궁금하시다면 Click !</div>
-    <div id="close-btn" class="">다시 숨기시려면 Click !</div>
+    <div id="main-title"><span>ABOUT</span></div>
+    <div class="open-btn active">개발 이전의 이력이 궁금하시다면 Click !</div>
+    <div class="close-btn">다시 숨기시려면 Click !</div>
     
     <div id="etc-wrap" class="info-wrap">
       <div class="info-title">ETC INFO</div>
@@ -88,19 +88,19 @@
 
 <script>
 $(document).ready(function(){
-	  $("#open-btn").click(function(){
+	  $(".open-btn").click(function(){
 	    $("#etc-wrap").slideDown(1000, function() {
 	      $("#etc-wrap").addClass("active");
 	    });
 	    $(this).removeClass("active");
-	    $("#close-btn").addClass("active");
+	    $(".close-btn").addClass("active");
 		})
-		$("#close-btn").click(function(){
+		$(".close-btn").click(function(){
 	    $("#etc-wrap").slideUp(1000, function() {
 	      $("#etc-wrap").removeClass("active");
 	    });
 	    $(this).removeClass("active");
-	    $("#open-btn").addClass("active"); 
+	    $(".open-btn").addClass("active"); 
 	  })
 });
 </script>

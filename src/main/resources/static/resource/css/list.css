@@ -125,7 +125,7 @@
   padding-left: 2rem;
 }
 #board-list tbody td a{
-  display:inline-block
+  display:inline-block;
 }
 #list-footer{
   width: 80%;

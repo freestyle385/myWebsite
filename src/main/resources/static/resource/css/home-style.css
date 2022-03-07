@@ -1,10 +1,10 @@
-/* about-wrap 시작 */
-#about-wrap{
+/* about-wrap, projects-wrap 시작 */
+#about-wrap, #projects-wrap{
   width: 100%;
   background-color: #C2EDF2;
   padding-bottom: 12rem;
 }
-#about-title{
+#main-title{
   width: 100%;
   text-align: center;
   padding: 5rem 0;
@@ -12,7 +12,7 @@
   font-weight: 700;
   color: #04C4D9;
 }
-#open-btn, #close-btn{
+.open-btn, .close-btn{
   width: 30%;
   margin: 0 auto;
   font-size: 1.2rem;
@@ -22,7 +22,7 @@
   padding-bottom: 5rem;
   display: none;
 }
-#open-btn.active, #close-btn.active{
+.open-btn.active, .close-btn.active{
   display: block;
 }
 #etc-wrap{
@@ -66,4 +66,27 @@
 .sub-body:last-child{
   margin-bottom: 0;
 }
-/* about-wrap 끝 */
+.sub-body a:hover{
+  color: #4AD988;  	
+}
+#projects-wrap .sub-body-1{
+  margin-bottom: 1rem;
+}
+#projects-wrap .sub-body-2{
+  width: 90%;
+  border-top: 2px solid #272559;
+  border-bottom: 2px solid #272559;	
+  margin: 0 auto;
+}
+#projects-wrap .sub-body-2 table{
+  width: 75%;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0 0.75rem;
+  font-size: 1rem;
+}
+#projects-wrap .sub-body-2 table th{
+  vertical-align: top;
+  text-align: left;	
+}
+/* about-wrap, projects-wrap 끝 */

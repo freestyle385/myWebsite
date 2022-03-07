@@ -23,7 +23,7 @@
         <a href="../about">ABOUT</a>
       </li>
       <li class="menu">
-         <a href="#">PROJECTS</a>
+         <a href="../projects">PROJECTS</a>
       </li>
       <li class="menu">
          <a href="../board/list">BOARD</a>

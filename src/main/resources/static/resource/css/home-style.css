@@ -69,6 +69,11 @@
 .sub-body a:hover{
   color: #4AD988;  	
 }
+#projects-wrap .sub-body video{
+  max-width: 90%;
+  display: block;
+  margin: 2rem auto;	
+}
 #projects-wrap .sub-body-1{
   margin-bottom: 1rem;
 }

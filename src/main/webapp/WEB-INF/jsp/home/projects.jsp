@@ -24,7 +24,7 @@
       	<span>1. 시연 영상</span>
       </div>
       <div class="sub-body">
-		
+		<video autoplay controls loop muted src="/resource/video/MyWebsite_video.mp4"></video>
       </div>
       <div class="sub-title">
       	<span>2. 프로젝트 소개</span>
@@ -72,28 +72,67 @@
       </div>
     </div>
     
+    <div class="info-wrap">
+      <div class="info-title">포켓카드노트 (팀 프로젝트)</div>
+      <div class="sub-title">
+      	<span>1. 시연 영상</span>
+      </div>
+      <div class="sub-body">
+		
+      </div>
+      <div class="sub-title">
+      	<span>2. 프로젝트 소개</span>
+      </div>
+      <div class="sub-body">
+      	<div class="sub-body-1">
+      		<span>면접 대비 또는 자격증 시험을 준비하면서, 나만의 주관식 문제를 쉽게 정리하고 풀어볼 수 있으면 어떨까하는 생각에서 아이디어를 착안하였습니다. 따라서 전반적인 디자인이나 기능 또한, 단어장으로 쓰일 법한 작은 포켓노트를 떠올리며 구상하였습니다.<br/>주 역할로는 아이디어 구상부터 화면 설계 전반 및 기능 설계 일부, 프론트엔드 개발을 담당하였습니다. 그리고 Git Branch를 관리하고 프론트-백엔드 간의 요구사항을 조율하며 협업을 원활하게 이루어가는 연습을 하는 데 초점을 맞추었습니다.<br/>비록 JSP를 활용하면서 완전한 프론트엔드 개발을 경험하지는 못 했지만, 서버와 브라우저 간 유기적인 데이터 통신에 있어서 잘 협의된 데이터 포맷이 중요하다는 점을 프론트엔드의 관점에서 느껴볼 수 있었습니다.</span>
+      	</div>
+      	<div class="sub-body-2">
+      		<table>
+	      		<colgroup>
+				    <col width="50%"/>
+				    <col width="50%"/>
+			    </colgroup>
+			    <tbody>
+			    	<tr>
+			    		<th scope="row">&#128504; 주요 기능</th>
+			    		<td>최근 생성한 해시태그 목록, 학습 상태 확인<br/>카드 CRUD, 해시태그와 학습 상태, 키워드 검색<br/>다수 카드의 학습 상태 일괄 변경 및 각 카드별 학습 상태 변경<br/>각 카드별 문제를 보고 연습 풀이 후 정답 확인<br/>카카오 계정을 통한 회원가입/탈퇴<br/>내 회원정보 보기</td>
+			    	</tr>
+			    	<tr>
+			    		<th scope="row">&#128504; Front-end</th>
+			    		<td>HTML, CSS, JS, JQuery</td>
+			    	</tr>
+			    	<tr>
+			    		<th scope="row">&#128504; Back-end</th>
+			    		<td>Spring Framework, JSP</td>
+			    	</tr>
+			    	<tr>
+			    		<th scope="row">&#128504; Database</th>
+			    		<td>MySql</td>
+			    	</tr>
+			    	<tr>
+			    		<th scope="row">&#128504; Deployment</th>
+			    		<td>Naver Cloud Platform</td>
+			    	</tr>
+			    </tbody>									
+      		</table>
+      	</div>
+      </div>
+      <div class="sub-title">
+        <span>3. 프로젝트 개발노트</span>
+      </div>
+      <div class="sub-body">
+      	<a href="https://www.notion.so/82309d64fd34459f99c2dc7130aca385" target="_blank">포켓카드노트 개발노트(Notion) 바로가기</a>
+      </div>
+    </div>
+    
   </section>
 </article>
 <!-- footer.jspf 불러오기 -->
 <%@ include file="../common/footer.jspf"%>
 
 <script>
-$(document).ready(function(){
-	  $("#open-btn").click(function(){
-	    $("#etc-wrap").slideDown(1000, function() {
-	      $("#etc-wrap").addClass("active");
-	    });
-	    $(this).removeClass("active");
-	    $("#close-btn").addClass("active");
-		})
-		$("#close-btn").click(function(){
-	    $("#etc-wrap").slideUp(1000, function() {
-	      $("#etc-wrap").removeClass("active");
-	    });
-	    $(this).removeClass("active");
-	    $("#open-btn").addClass("active"); 
-	  })
-});
+
 </script>
 
 </body>

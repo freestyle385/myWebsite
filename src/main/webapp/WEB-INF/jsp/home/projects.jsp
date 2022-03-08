@@ -15,8 +15,28 @@
 
 </body>
 <article>
+  <section id="archive-wrap">
+  	<div id="archive-info" class="info-wrap">
+  		<div class="archive-content">
+  			<div class="archive-title">Github</div>
+  			<div class="archive-link"><a href="https://github.com/freestyle385" target="_blank">github.com/freestyle385</a></div>
+  			<div class="archive-body">학원 수강 내용, 프로젝트 소스 코드</div>
+  		</div>
+  		<div class="archive-content">
+  			<div class="archive-title">Tistory</div>
+  			<div class="archive-link"><a href="https://freestyle385.tistory.com/" target="_blank">freestyle385.tistory.com</a></div>
+  			<div class="archive-body">습득한 지식을 정리하는 블로그</div>
+  		</div>
+  		<div class="archive-content">
+  			<div class="archive-title">Codepen</div>
+  			<div class="archive-link"><a href="https://to2.kr/cBj" target="_blank">to2.kr/cBj</a></div>
+  			<div class="archive-body">학원 수강 중 필기 내용<br/>(블로그에 통합 예정)</div>
+  		</div>
+  	</div>
+  	
+  </section>
   <section id="projects-wrap">
-    <div id="main-title"><span>Projects</span></div>
+    <div class="main-title"><span>Projects</span></div>
     
     <div class="info-wrap">
       <div class="info-title">My Website (개인 프로젝트)</div>

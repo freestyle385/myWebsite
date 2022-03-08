@@ -1,10 +1,44 @@
+/* archive-wrap 시작 */
+#archive-wrap{
+  width: 100%;
+  background-color: #C2EDF2;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+}
+#archive-info{
+  display: flex;
+  justify-content: space-between;  	
+}
+.archive-content{
+  width: 30%;
+  height: 10rem;
+}
+.archive-title{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #272559;   	
+}
+.archive-link, .archive-body{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 2rem;
+  font-size: 1rem;
+  color: #454545;	
+}
+.archive-link > a:hover{
+  color: #4AD988;	
+}
+/* archive-wrap 끝 */
 /* about-wrap, projects-wrap 시작 */
 #about-wrap, #projects-wrap{
   width: 100%;
   background-color: #C2EDF2;
   padding-bottom: 12rem;
 }
-#main-title{
+.main-title{
   width: 100%;
   text-align: center;
   padding: 5rem 0;

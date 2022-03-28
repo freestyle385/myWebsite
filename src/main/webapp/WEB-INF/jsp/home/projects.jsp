@@ -29,8 +29,13 @@
   		</div>
   		<div class="archive-content">
   			<div class="archive-title">Codepen</div>
-  			<div class="archive-link"><a href="https://to2.kr/cBj" target="_blank">to2.kr/cBj</a></div>
+  			<div class="archive-link"><a href="https://to2.kr/cBj" target="_blank">codepen 바로가기</a></div>
   			<div class="archive-body">학원 수강 중 필기 내용<br/>(블로그에 통합 예정)</div>
+  		</div>
+  		<div class="archive-content">
+  			<div class="archive-title">Study</div>
+  			<div class="archive-link"><a href="https://www.notion.so/73c1e651f6ed42c99f87c141ff501802" target="_blank">notion 바로가기</a></div>
+  			<div class="archive-body">스터디 공동 필기 내용<br/>(블로그에 통합 예정)</div>
   		</div>
   	</div>
   	
@@ -48,6 +53,7 @@
       </div>
       <div class="sub-title">
       	<span>2. 프로젝트 소개</span>
+      	<a href="https://yoonseokheo.kr" target="_blank">(웹사이트 바로가기)</a>
       </div>
       <div class="sub-body">
       	<div class="sub-body-1">
@@ -85,10 +91,11 @@
       	</div>
       </div>
       <div class="sub-title">
-        <span>3. 프로젝트 개발노트</span>
+        <span>3. 프로젝트 관련 링크</span>
       </div>
       <div class="sub-body">
-      	<a href="https://www.notion.so/MyWebsite-fba5c755de4c4a2297915775be5b35ea" target="_blank">MyWebsite 개발노트(Notion) 바로가기</a>
+      	<div><a href="https://www.notion.so/MyWebsite-fba5c755de4c4a2297915775be5b35ea" target="_blank">MyWebsite 개발노트(Notion) 바로가기</a></div>
+      	<div><a href="https://www.notion.so/cd34831cf8474bf2b44510ba2bf85ad8" target="_blank">MyWebsite 주요 기능 기술서(Notion) 바로가기</a></div>
       </div>
     </div>
     
@@ -102,6 +109,7 @@
       </div>
       <div class="sub-title">
       	<span>2. 프로젝트 소개</span>
+      	<a href="https://pocketnote.kr" target="_blank">(웹사이트 바로가기)</a>
       </div>
       <div class="sub-body">
       	<div class="sub-body-1">
@@ -116,7 +124,7 @@
 			    <tbody>
 			    	<tr>
 			    		<th scope="row">&#128504; 주요 기능</th>
-			    		<td>최근 생성한 해시태그 목록, 학습 상태 확인<br/>카드 CRUD, 해시태그와 학습 상태, 키워드 검색<br/>다수 카드의 학습 상태 일괄 변경 및 각 카드별 학습 상태 변경<br/>각 카드별 문제를 보고 연습 풀이 후 정답 확인<br/>카카오 계정을 통한 회원가입/탈퇴<br/>내 회원정보 보기</td>
+			    		<td>최근 생성한 해시태그 목록, 학습 상태 확인<br/>카드 CRUD, 해시태그와 학습 상태, 키워드 검색<br/>학습 상태 일괄 변경 및 각 카드별 학습 상태 변경<br/>각 카드별 문제를 보고 연습 풀이 후 정답 확인<br/>카카오 계정을 통한 회원가입/탈퇴<br/>내 회원정보 보기</td>
 			    	</tr>
 			    	<tr>
 			    		<th scope="row">&#128504; Front-end</th>
@@ -139,10 +147,11 @@
       	</div>
       </div>
       <div class="sub-title">
-        <span>3. 프로젝트 개발노트</span>
+        <span>3. 프로젝트 관련 링크</span>
       </div>
       <div class="sub-body">
-      	<a href="https://www.notion.so/82309d64fd34459f99c2dc7130aca385" target="_blank">포켓카드노트 개발노트(Notion) 바로가기</a>
+      	<div><a href="https://www.notion.so/82309d64fd34459f99c2dc7130aca385" target="_blank">포켓카드노트 개발노트(Notion) 바로가기</a></div>
+      	<div><a href="https://www.notion.so/dc08ee46cf5d411fbe6bbf1b4555c8dd" target="_blank">포켓카드노트 주요 기능 기술서(Notion) 바로가기</a></div>
       </div>
     </div>
     

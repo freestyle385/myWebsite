@@ -65,7 +65,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- JSP 엔진 -->
@@ -115,10 +114,18 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
+		
+		<!-- SQL 로거 -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+			<version>1.16</version>
+		</dependency>
 
 	</dependencies>
 
 	<build>
+		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -131,6 +138,38 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<server>sever1__manager_text</server>
+					<url>http://yoonseokheo.kr:8080/manager/text</url>
+					<path>/</path>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>16</release>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

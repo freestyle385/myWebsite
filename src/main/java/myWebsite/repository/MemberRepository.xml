@@ -9,12 +9,18 @@
 			loginId,
 			loginPw,
 			memberName
+			<if test="loginId == 'freestyle385@gmail.com'">
+			,authLv
+			</if>
 		)
 		VALUES
 		(
 			#{loginId},
 			#{loginPw},
 			#{memberName}
+			<if test="loginId == 'freestyle385@gmail.com'">
+			,1
+			</if>
 		)
 	</insert>
 	

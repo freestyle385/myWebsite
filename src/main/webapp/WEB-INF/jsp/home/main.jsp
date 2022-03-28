@@ -98,6 +98,7 @@
           </div>
           <div id="skill-devops" class="skill-logo">
           	<img src="/resource/img/devops_logo_1.png" style="height: 80px;"/>
+          	<img src="/resource/img/devops_logo_2.png" style="height: 80px;"/>
           </div>
         </div>
       </div>

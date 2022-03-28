@@ -29,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	// 파일을 불러옴
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/summernoteImage/**").addResourceLocations("file:///C:/summernote_image/");
+		registry.addResourceHandler("/summernoteImage/**").addResourceLocations("file:///opt/tomcat/apache-tomcat-9.0.36/yoonseokheo.kr/");
 	}
 
 	// 인터셉터에 적용하는 메서드

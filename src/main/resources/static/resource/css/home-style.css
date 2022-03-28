@@ -10,7 +10,7 @@
   justify-content: space-between;  	
 }
 .archive-content{
-  width: 30%;
+  width: 25%;
   height: 10rem;
 }
 .archive-title{
@@ -90,6 +90,9 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: #272559;
+}
+.sub-title a:hover{
+  color: #4AD988;    	
 }
 .sub-body{
   width: 100%;

@@ -1,6 +1,7 @@
 package myWebsite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,9 @@ public class MemberService {
 
 	private MemberRepository memberRepository;
 	private LoginStatus loginStatus;
+	
+	@Value("${custom.redirectUri}")
+	private String redirectUri;
 
 	public MemberService(MemberRepository memberRepository, LoginStatus loginStatus) {
 		this.memberRepository = memberRepository;
@@ -130,7 +134,7 @@ public class MemberService {
 		sendMail.setText(new StringBuffer().append("<h1>HYS's Portfolio 임시 비밀번호 입니다</h1>")
 				.append("<div style='font-weight:bold;font-size:20px;'>임시 비밀번호 : ").append(newLoginPw).append("</div>")
 				.toString());
-		sendMail.setFrom("freestyle4583@gmail.com", "HYS's Portfolio");
+		sendMail.setFrom("no-reply@yoonseokheo.kr", "HYS's Portfolio");
 		sendMail.setTo(loginId);
 		sendMail.send();
 
@@ -214,9 +218,9 @@ public class MemberService {
 
 		sendMail.setSubject("[HYS's Portfolio 회원가입 이메일 인증입니다.]");
 		sendMail.setText(new StringBuffer().append("<h1>HYS's Portfolio 이메일 인증 입니다</h1>")
-				.append("<a href='http://localhost:8080/member/emailAuth?email=").append(loginId).append("&key=")
+				.append("<a href='" + redirectUri + "/member/emailAuth?email=").append(loginId).append("&key=")
 				.append(key).append("' target='_blank'>인증 완료를 위해 여기를 눌러주세요</a>").toString());
-		sendMail.setFrom("freestyle4583@gmail.com", "HYS's Portfolio");
+		sendMail.setFrom("no-reply@yoonseokheo.kr", "HYS's Portfolio");
 		sendMail.setTo(loginId);
 		sendMail.send();
 	}

@@ -8,7 +8,37 @@ spring:
     converters:
       preferred-json-mapper: gson
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/myWebsite?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/myWebsite?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
     username: freestyle385
     password: freestyle385
+  config:
+    activate:
+      on-profile: local
+custom:
+  redirectUri: http://localhost:8080
+  logging:
+    dir: log
+    level: debug
+---
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    converters:
+      preferred-json-mapper: gson
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/myWebsite?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: local385
+    password: local385
+  config:
+    activate:
+      on-profile: production
+custom:
+  redirectUri: https://yoonseokheo.kr
+  logging:
+    dir: /tmp/yoonseokheo.kr-logs
+    level: info

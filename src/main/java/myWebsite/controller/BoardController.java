@@ -97,7 +97,7 @@ public class BoardController {
 		JsonObject jsonObject = new JsonObject();
 
 		// 저장될 외부 파일 경로
-		String fileRoot = "C:\\summernote_image\\";
+		String fileRoot = "/opt/tomcat/apache-tomcat-9.0.36/yoonseokheo.kr/";
 		// 오리지널 파일명
 		String originalFileName = multipartFile.getOriginalFilename();
 		// 파일 확장자

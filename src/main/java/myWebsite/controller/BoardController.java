@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +34,9 @@ import myWebsite.vo.LoginStatus;
 public class BoardController {
 	private BoardService boardService;
 	private LoginStatus loginStatus;
+	
+	@Value("${spring.config.activate.on-profile}")
+	private String profileStatus;
 
 	public BoardController(BoardService boardService, LoginStatus loginStatus) {
 		this.boardService = boardService;
@@ -95,9 +99,20 @@ public class BoardController {
 	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) throws Exception {
 
 		JsonObject jsonObject = new JsonObject();
-
+		
 		// 저장될 외부 파일 경로
-		String fileRoot = "/opt/tomcat/apache-tomcat-9.0.36/yoonseokheo.kr/";
+		String fileRoot = "";
+		
+		System.out.println(profileStatus);
+		System.out.println("현재 값 비어있음");
+		
+		// 프로필에 따라 각각 경로 지정
+		if (profileStatus.equals("local")) {
+			fileRoot = "C:/summernote_image/";
+		} else if (profileStatus.equals("production")){
+			fileRoot = "opt/tomcat/apache-tomcat-9.0.36/yoonseokheo.kr/images/";
+		}
+		
 		// 오리지널 파일명
 		String originalFileName = multipartFile.getOriginalFilename();
 		// 파일 확장자

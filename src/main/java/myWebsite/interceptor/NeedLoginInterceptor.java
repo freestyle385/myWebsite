@@ -22,7 +22,7 @@ public class NeedLoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		if(!loginStatus.isLogined()) {
-			Util.javaHistoryBack(resp, "로그인 후 이용해주세요.");
+			Util.javaReplace(resp, "로그인 후 이용해주세요.", "/member/login");
 			return false;
 		}
 		

@@ -1,5 +1,6 @@
 package myWebsite.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -16,6 +17,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	BeforeActionInterceptor beforeActionInterceptor;
 	NeedLoginInterceptor needLoginInterceptor;
 	NeedLogoutInterceptor needLogoutInterceptor;
+	
+	@Value("${spring.config.activate.on-profile}")
+	private String profileStatus;
 
 	public WebMvcConfig(BeforeActionInterceptor beforeActionInterceptor, NeedLoginInterceptor needLoginInterceptor,
 			NeedLogoutInterceptor needLogoutInterceptor) {
@@ -29,7 +33,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	// 파일을 불러옴
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/summernoteImage/**").addResourceLocations("file:///opt/tomcat/apache-tomcat-9.0.36/yoonseokheo.kr/");
+		
+		if (profileStatus.equals("local")) {
+			registry.addResourceHandler("/summernoteImage/**").addResourceLocations("file:///C:/summernote_image/");
+		} else if (profileStatus.equals("production")){
+			registry.addResourceHandler("/summernoteImage/**").addResourceLocations("file:///opt/tomcat/apache-tomcat-9.0.36/yoonseokheo.kr/images/");
+		}
 	}
 
 	// 인터셉터에 적용하는 메서드

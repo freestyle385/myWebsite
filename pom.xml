@@ -147,7 +147,7 @@
 				<configuration>
 					<server>sever1__manager_text</server>
 					<url>http://yoonseokheo.kr:8080/manager/text</url>
-					<path>/</path>
+					<path>/ROOT##1</path>
 				</configuration>
 			</plugin>
 

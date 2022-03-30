@@ -2,7 +2,6 @@ package myWebsite.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -33,13 +32,7 @@ public class BoardService {
 
 	public ResultData<ArrayList<Board>> getBoardList(String hashtag, String searchKeyword) throws Exception {
 
-		// 넘겨받은 hashtag 문자열을 분할해 list에 추가
-		List<String> hashtagArr = new ArrayList<>();
-		if (!Util.emptyChk(hashtag)) {
-			hashtagArr = Arrays.asList(hashtag.split(","));
-		}
-
-		ArrayList<Board> boardList = boardRepository.getBoardList(hashtagArr, searchKeyword);
+		ArrayList<Board> boardList = boardRepository.getBoardList(hashtag, searchKeyword);
 
 		ResultData<ArrayList<Board>> listRd = new ResultData<>("S", "boardList", boardList);
 		return listRd;
